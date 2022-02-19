@@ -46,28 +46,47 @@ class SceneOneVisuals {
   }
 
   drawHal() {
-    push();
-    rectMode(CENTER);
-    fill(0);
-    strokeWeight(5);
-    stroke(150);
-    rect(width / 2, height / 4.5, 90, 210, 5);
-    pop();
 
-    push();
-    rectMode(CENTER);
-    fill(60);
-    strokeWeight(5);
-    stroke(150);
-    rect(width / 2, height / 2.8, 85, 45);
-    pop();
+        //main rectangle
+        push();
+        rectMode(CENTER);
+        fill(0);
+        strokeWeight(2.5);
+        stroke(150);
+        rect(width / 2, height / 4.5, 90, 210, 2.5);
+        pop();
 
-    push();
-    fill(240, 0, 0);
-    strokeWeight(5);
-    stroke(100);
-    ellipse(width / 2, height / 4, 50);
-    pop();
+        //hal's speaker
+        push();
+        rectMode(CENTER);
+        fill(60);
+        strokeWeight(2.5);
+        stroke(150);
+        rect(width / 2, height / 2.8, 88, 48, 2.5);
+        pop();
+
+        //Black circle
+        push();
+        fill(0);
+        strokeWeight(3);
+        stroke(100);
+        ellipse(width / 2, height / 4, 50);
+        pop();
+
+        //darker red circle
+        push();
+        fill(150, 0, 0);
+        noStroke();
+        ellipse(width / 2, height / 4, 18);
+        pop();
+
+        //red circle
+        push();
+        fill(240, 0, 0);
+        noStroke();
+        ellipse(width / 2, height / 4, 12.5);
+        pop();
+
 
   }
 

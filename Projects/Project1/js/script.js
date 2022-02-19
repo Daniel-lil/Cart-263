@@ -17,6 +17,8 @@ let predictions = [];
 
 let sceneOneVisuals;
 
+let sceneTwoVisuals;
+
 let state = undefined;
 
 let hand;
@@ -42,9 +44,11 @@ Description of setup
 function setup() {
   createCanvas(950, 600);
 
-  state = `sceneOne`;
+  state = `sceneTwo`;
 
   sceneOneVisuals = new SceneOneVisuals();
+
+  sceneTwoVisuals = new SceneTwoVisuals();
 
   //access user's webcam
   video = createCapture(VIDEO);
@@ -58,7 +62,7 @@ function setup() {
   });
 
   //listen for predictions
-  handpose.on(`predict`, function (results) {
+  handpose.on(`predict`, function(results) {
     console.log(results);
     predictions = results;
   });
@@ -70,8 +74,8 @@ Description of draw()
 function draw() {
   console.log(state);
 
-if (state === `sceneOne`){
-    background(235);
+  if (state === `sceneOne`) {
+    background(220);
 
     sceneOneVisuals.drawScene1();
 
@@ -83,56 +87,62 @@ if (state === `sceneOne`){
 
     screwCheck1();
 
-  } else if (state === `sceneTwo`){
+  } else if (state === `sceneTwo`) {
     background(0);
+
+    sceneTwoVisuals.drawScene2();
+
+    sceneTwoVisuals.drawHal();
+
+    drawScrewdriver();
   }
 }
 
 function drawScrewdriver() {
-if (predictions.length > 0) {
-  hand = predictions[0];
-  index = hand.annotations.indexFinger;
-  tip = index[3];
-  base = index[0];
-  tipX = tip[0];
-  tipY = tip[1];
-  baseX = base[0];
-  baseY = base[1];
+  if (predictions.length > 0) {
+    hand = predictions[0];
+    index = hand.annotations.indexFinger;
+    tip = index[3];
+    base = index[0];
+    tipX = tip[0];
+    tipY = tip[1];
+    baseX = base[0];
+    baseY = base[1];
 
-  push();
-  //screwdriver shaft
-  noFill();
-  stroke(200);
-  strokeWeight(10);
-  line(baseX*2, baseY*2, tipX*2, tipY*2);
-  pop();
+    push();
+    //screwdriver shaft
+    noFill();
+    stroke(200);
+    strokeWeight(10);
+    line(baseX * 2, baseY * 2, tipX * 2, tipY * 2);
+    pop();
 
-  push();
-  //screwdriver tip
-  rectMode(CENTER);
-  noStroke();
-  fill(200);
-  rect(tipX*2, tipY*2,8,8,);
-  pop();
+    push();
+    //screwdriver tip
+    rectMode(CENTER);
+    noStroke();
+    fill(200);
+    rect(tipX * 2, tipY * 2, 8, 8, );
+    pop();
 
-  push();
-  //screwdriver base
-  rectMode(CENTER);
-  noStroke();
-  fill(140,0,0);
-  rect(baseX*2, baseY*2,20,90,50);
-  pop();
-}
+    push();
+    //screwdriver base
+    rectMode(CENTER);
+    noStroke();
+    fill(140, 0, 0);
+    rect(baseX * 2, baseY * 2, 20, 90, 50);
+    pop();
+  }
 }
 
 function screwCheck1() {
   let d1 = dist(tipX, tipY, 40, 40);
   if (d1 < 45 / 2) {
     setTimeout(function() {
-    let d2 = dist(tipX, tipY, 40, 40);
-    if (d2 < 45 / 2) {
-    state = `sceneTwo`;
-    }
-  },5000);
+      let d2 = dist(tipX, tipY, 40, 40);
+      if (d2 < 45 / 2) {
+        state = `sceneTwo`;
+      }
+    }, 5000);
   }
 }
