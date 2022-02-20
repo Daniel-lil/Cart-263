@@ -21,6 +21,13 @@ let sceneTwoVisuals;
 
 let state = undefined;
 
+let screwColours = {
+  screwColour1: 150,
+  screwColour2: 150,
+  screwColour3: 150,
+  screwColour4: 150
+}
+
 let hand;
 let index;
 let tip;
@@ -44,7 +51,7 @@ Description of setup
 function setup() {
   createCanvas(950, 600);
 
-  state = `sceneTwo`;
+  state = `sceneOne`;
 
   sceneOneVisuals = new SceneOneVisuals();
 
@@ -86,6 +93,8 @@ function draw() {
     drawScrewdriver();
 
     screwCheck1();
+
+    stateTransition();
 
   } else if (state === `sceneTwo`) {
     background(0);
@@ -137,12 +146,49 @@ function drawScrewdriver() {
 
 function screwCheck1() {
   let d1 = dist(tipX, tipY, 40, 40);
+  let d2 = dist(tipX, tipY, width - 40, height - 40);
+  let d3 = dist(tipX, tipY, 40, height - 40);
+  let d4 = dist(tipX, tipY, width - 40, 40);
+
   if (d1 < 45 / 2) {
     setTimeout(function() {
-      let d2 = dist(tipX, tipY, 40, 40);
-      if (d2 < 45 / 2) {
-        state = `sceneTwo`;
+      if (d1 < 45 / 2) {
+        screwColours.screwColour1 = 0;
+        screwColours.screwColour2 = 0;
+        screwColours.screwColour3 = 0;
+        screwColours.screwColour4 = 0;
+
       }
-    }, 5000);
+    }, 3000);
   }
+  else if (d2 < 45 / 2) {
+    setTimeout(function() {
+      if (d2 < 45 / 2) {
+
+      }
+    }, 3000);
+  }
+
+  else if (d3 < 45 / 2) {
+    setTimeout(function() {
+      if (d3 < 45 / 2) {
+
+      }
+    }, 3000);
+  }
+
+  else if (d4 < 45 / 2) {
+    setTimeout(function() {
+      if (d4 < 45 / 2) {
+
+      }
+    }, 3000);
+  }
+}
+
+function stateTransition(){
+if (screwColours.screwColour1 === 0 && screwColours.screwColour2 === 0 && screwColours.screwColour3 === 0 && screwColours.screwColour4 === 0
+) {
+  state = `sceneTwo`;
+}
 }

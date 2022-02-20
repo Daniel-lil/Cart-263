@@ -86,35 +86,31 @@ class SceneOneVisuals {
         noStroke();
         ellipse(width / 2, height / 4, 12.5);
         pop();
-
-
-  }
-
-
-  drawScrews() {
+}
+drawScrews() {
     push();
-    fill(150);
+    fill(screwColours.screwColour1);
     strokeWeight(1);
     stroke(0);
     ellipse(width - 40, height - 40, 45);
     pop();
 
     push();
-    fill(150);
+    fill(screwColours.screwColour2);
     strokeWeight(1);
     stroke(0);
     ellipse(40, 40, 45);
     pop();
 
     push();
-    fill(150);
+    fill(screwColours.screwColour3);
     strokeWeight(1);
     stroke(0);
     ellipse(width - 40, 40, 45);
     pop();
 
     push();
-    fill(150);
+    fill(screwColours.screwColour4);
     strokeWeight(1);
     stroke(0);
     ellipse(40, height - 40, 45);

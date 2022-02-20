@@ -35,6 +35,22 @@ class SceneTwoVisuals {
     rect(width / 2.75, height / 2, 400, height / 2.75 - 5, );
     pop();
 
+    for (let i = 0; i < 950; i++) {
+      push();
+      rectMode(CENTER);
+      fill(80, 0, 0);
+      noStroke();
+      rect(i*15, 30, 6, 40, 5);
+      pop();
+
+      push();
+      rectMode(CENTER);
+      fill(80, 0, 0);
+      noStroke();
+      rect(i*15, height-30, 6, 40, 1.5);
+      pop();
+
+    }
   }
 
   drawHal() {
