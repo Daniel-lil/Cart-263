@@ -70,7 +70,7 @@ function setup() {
 
   //listen for predictions
   handpose.on(`predict`, function(results) {
-    console.log(results);
+
     predictions = results;
   });
 }
@@ -146,17 +146,19 @@ function drawScrewdriver() {
 
 function screwCheck1() {
   let d1 = dist(tipX, tipY, 40, 40);
-  let d2 = dist(tipX, tipY, width - 40, height - 40);
-  let d3 = dist(tipX, tipY, 40, height - 40);
-  let d4 = dist(tipX, tipY, width - 40, 40);
+  let d2 = dist(tipX, tipY, 460, 297.5);
+  let d3 = dist(tipX, tipY, 40, 297.5);
+  let d4 = dist(tipX, tipY, 460, 40);
+
+  console.log(d4);
 
   if (d1 < 45 / 2) {
     setTimeout(function() {
       if (d1 < 45 / 2) {
-        screwColours.screwColour1 = 0;
         screwColours.screwColour2 = 0;
-        screwColours.screwColour3 = 0;
-        screwColours.screwColour4 = 0;
+
+
+
 
       }
     }, 3000);
@@ -164,7 +166,7 @@ function screwCheck1() {
   else if (d2 < 45 / 2) {
     setTimeout(function() {
       if (d2 < 45 / 2) {
-
+        screwColours.screwColour1 = 0;
       }
     }, 3000);
   }
@@ -172,7 +174,7 @@ function screwCheck1() {
   else if (d3 < 45 / 2) {
     setTimeout(function() {
       if (d3 < 45 / 2) {
-
+screwColours.screwColour4 = 0;
       }
     }, 3000);
   }
@@ -180,7 +182,7 @@ function screwCheck1() {
   else if (d4 < 45 / 2) {
     setTimeout(function() {
       if (d4 < 45 / 2) {
-
+screwColours.screwColour3 = 0;
       }
     }, 3000);
   }
