@@ -39,7 +39,7 @@ class SceneTwoVisuals {
     push();
     rectMode(CENTER);
     noStroke();
-    fill(255, 255, 255);
+    fill(memoryUnitColours.memoryUnit1Colour);
     rect(170, 235, 15, 60, 2);
     pop();
 
@@ -47,7 +47,7 @@ class SceneTwoVisuals {
     push();
     rectMode(CENTER);
     noStroke();
-    fill(255, 255, 255);
+    fill(memoryUnitColours.memoryUnit2Colour);
     rect(220, 235, 15, 60, 2);
     pop();
 
@@ -55,7 +55,7 @@ class SceneTwoVisuals {
     push();
     rectMode(CENTER);
     noStroke();
-    fill(255, 255, 255);
+    fill(memoryUnitColours.memoryUnit3Colour);
     rect(270, 235, 15, 60, 2);
     pop();
 
@@ -63,7 +63,7 @@ class SceneTwoVisuals {
     push();
     rectMode(CENTER);
     noStroke();
-    fill(255, 255, 255);
+    fill(memoryUnitColours.memoryUnit4Colour);
     rect(320, 235, 15, 60, 2);
     pop();
 
@@ -71,7 +71,7 @@ class SceneTwoVisuals {
     push();
     rectMode(CENTER);
     noStroke();
-    fill(255, 255, 255);
+    fill(memoryUnitColours.memoryUnit5Colour);
     rect(370, 235, 15, 60, 2);
     pop();
 
@@ -79,7 +79,7 @@ class SceneTwoVisuals {
     push();
     rectMode(CENTER);
     noStroke();
-    fill(255, 255, 255);
+    fill(memoryUnitColours.memoryUnit6Colour);
     rect(420, 235, 15, 60, 2);
     pop();
 
@@ -87,7 +87,7 @@ class SceneTwoVisuals {
     push();
     rectMode(CENTER);
     noStroke();
-    fill(255, 255, 255);
+    fill(memoryUnitColours.memoryUnit7Colour);
     rect(470, 235, 15, 60, 2);
     pop();
 
@@ -95,7 +95,7 @@ class SceneTwoVisuals {
     push();
     rectMode(CENTER);
     noStroke();
-    fill(255, 255, 255);
+    fill(memoryUnitColours.memoryUnit8Colour);
     rect(520, 235, 15, 60, 2);
     pop();
 
@@ -103,7 +103,7 @@ class SceneTwoVisuals {
     push();
     rectMode(CENTER);
     noStroke();
-    fill(255, 255, 255);
+    fill(memoryUnitColours.memoryUnit9Colour);
     rect(170, 337.5, 15, 60, 2);
     pop();
 
@@ -111,7 +111,7 @@ class SceneTwoVisuals {
     push();
     rectMode(CENTER);
     noStroke();
-    fill(255, 255, 255);
+    fill(memoryUnitColours.memoryUnit10Colour);
     rect(220, 337.5, 15, 60, 2);
     pop();
 
@@ -119,7 +119,7 @@ class SceneTwoVisuals {
     push();
     rectMode(CENTER);
     noStroke();
-    fill(255, 255, 255);
+    fill(memoryUnitColours.memoryUnit11Colour);
     rect(270, 337.5, 15, 60, 2);
     pop();
 
@@ -127,7 +127,7 @@ class SceneTwoVisuals {
     push();
     rectMode(CENTER);
     noStroke();
-    fill(255, 255, 255);
+    fill(memoryUnitColours.memoryUnit12Colour);
     rect(320, 337.5, 15, 60, 2);
     pop();
 
@@ -135,7 +135,7 @@ class SceneTwoVisuals {
     push();
     rectMode(CENTER);
     noStroke();
-    fill(255, 255, 255);
+    fill(memoryUnitColours.memoryUnit13Colour);
     rect(370, 337.5, 15, 60, 2);
     pop();
 
@@ -143,7 +143,7 @@ class SceneTwoVisuals {
     push();
     rectMode(CENTER);
     noStroke();
-    fill(255, 255, 255);
+    fill(memoryUnitColours.memoryUnit14Colour);
     rect(420, 337.5, 15, 60, 2);
     pop();
 
@@ -151,7 +151,7 @@ class SceneTwoVisuals {
     push();
     rectMode(CENTER);
     noStroke();
-    fill(255, 255, 255);
+    fill(memoryUnitColours.memoryUnit15Colour);
     rect(470, 337.5, 15, 60, 2);
     pop();
 
@@ -159,7 +159,7 @@ class SceneTwoVisuals {
     push();
     rectMode(CENTER);
     noStroke();
-    fill(255, 255, 255);
+    fill(memoryUnitColours.memoryUnit16Colour);
     rect(520, 337.5, 15, 60, 2);
     pop();
 
@@ -283,56 +283,56 @@ drawScrews(){
   ellipse(520, 286.25, 15,);
   pop();
 
-  //memory unit 9
+  //memory unit 9 screw
   push();
   noStroke();
   fill(150, 150, 150);
   ellipse(170, 388.75, 15);
   pop();
 
-  //memory unit 10
+  //memory unit 10 screw
   push();
   noStroke();
   fill(150, 150, 150);
   ellipse(220, 388.75, 15);
   pop();
 
-  //memory unit 11
+  //memory unit 11 screw
   push();
   noStroke();
   fill(150, 150, 150);
   ellipse(270, 388.75, 15);
   pop();
 
-  //memory unit 12
+  //memory unit 12 screw
   push();
   noStroke();
   fill(150, 150, 150);
   ellipse(320, 388.75, 15);
   pop();
 
-  //memory unit 13
+  //memory unit 13 screw
   push();
   noStroke();
   fill(150, 150, 150);
   ellipse(370, 388.75, 15);
   pop();
 
-  //memory unit 14
+  //memory unit 14 screw
   push();
   noStroke();
   fill(150, 150, 150);
   ellipse(420, 388.75, 15);
   pop();
 
-  //memory unit 15
+  //memory unit 15 screw
   push();
   noStroke();
   fill(150, 150, 150);
   ellipse(470, 388.75, 15);
   pop();
 
-  //memory unit 16
+  //memory unit 16 screw
   push();
   noStroke();
   fill(150, 150, 150);
@@ -340,5 +340,12 @@ drawScrews(){
   pop();
 
 }
-
+drawFadeShape(){
+  push();
+  rectMode(CENTER);
+  fill(0, 0, 0, fadeAmount);
+  noStroke();
+  rect(width/2, height/2, width, height);
+  pop();
+}
 }
