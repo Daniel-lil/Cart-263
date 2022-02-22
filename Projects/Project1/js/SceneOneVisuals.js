@@ -1,7 +1,8 @@
 class SceneOneVisuals {
   constructor() {}
 
-  drawScene1() {
+  drawBackground() {
+
     push();
     rectMode(CENTER);
     noFill();

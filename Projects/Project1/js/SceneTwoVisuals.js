@@ -1,7 +1,7 @@
 class SceneTwoVisuals {
   constructor() {}
 
-  drawScene2() {
+  drawBackground() {
 
     //left white rectangle
     push();
