@@ -76,9 +76,8 @@ class SceneOneVisuals {
         //darker red circle
         push();
         fill(150, 0, 0);
-        noStroke();
-        ellipse(width / 2, height / 4, 18);
-        pop();
+        noStroke();ellipse(width / 2, height / 4, 18);
+pop();
 
         //red circle
         push();

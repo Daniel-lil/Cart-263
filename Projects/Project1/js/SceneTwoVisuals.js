@@ -226,126 +226,126 @@ class SceneTwoVisuals {
 
   }
 
-drawScrews(){
-  //memory unit 1 screw
-  push();
-  noStroke();
-  fill(150, 150, 150);
-  ellipse(170, 286.25, 15,);
-  pop();
+  drawScrews() {
+    //memory unit 1 screw
+    push();
+    noStroke();
+    fill(150, 150, 150);
+    ellipse(170, 286.25, 15, );
+    pop();
 
-  //memory unit 2 screw
-  push();
-  noStroke();
-  fill(150, 150, 150);
-  ellipse(220, 286.25, 15,);
-  pop();
+    //memory unit 2 screw
+    push();
+    noStroke();
+    fill(150, 150, 150);
+    ellipse(220, 286.25, 15, );
+    pop();
 
-  //memory unit 3 screw
-  push();
-  noStroke();
-  fill(150, 150, 150);
-  ellipse(270, 286.25, 15,);
-  pop();
+    //memory unit 3 screw
+    push();
+    noStroke();
+    fill(150, 150, 150);
+    ellipse(270, 286.25, 15, );
+    pop();
 
-  //memory unit 4 screw
-  push();
-  noStroke();
-  fill(150, 150, 150);
-  ellipse(320, 286.25, 15,);
-  pop();
+    //memory unit 4 screw
+    push();
+    noStroke();
+    fill(150, 150, 150);
+    ellipse(320, 286.25, 15, );
+    pop();
 
-  //memory unit 5 screw
-  push();
-  noStroke();
-  fill(150, 150, 150);
-  ellipse(370, 286.25, 15,);
-  pop();
+    //memory unit 5 screw
+    push();
+    noStroke();
+    fill(150, 150, 150);
+    ellipse(370, 286.25, 15, );
+    pop();
 
-  //memory unit 6 screw
-  push();
-  noStroke();
-  fill(150, 150, 150);
-  ellipse(420, 286.25, 15,);
-  pop();
+    //memory unit 6 screw
+    push();
+    noStroke();
+    fill(150, 150, 150);
+    ellipse(420, 286.25, 15, );
+    pop();
 
-  //memory unit 7 screw
-  push();
-  noStroke();
-  fill(150, 150, 150);
-  ellipse(470, 286.25, 15,);
-  pop();
+    //memory unit 7 screw
+    push();
+    noStroke();
+    fill(150, 150, 150);
+    ellipse(470, 286.25, 15, );
+    pop();
 
-  //memory unit 8 screw
-  push();
-  noStroke();
-  fill(150, 150, 150);
-  ellipse(520, 286.25, 15,);
-  pop();
+    //memory unit 8 screw
+    push();
+    noStroke();
+    fill(150, 150, 150);
+    ellipse(520, 286.25, 15, );
+    pop();
 
-  //memory unit 9 screw
-  push();
-  noStroke();
-  fill(150, 150, 150);
-  ellipse(170, 388.75, 15);
-  pop();
+    //memory unit 9 screw
+    push();
+    noStroke();
+    fill(150, 150, 150);
+    ellipse(170, 388.75, 15);
+    pop();
 
-  //memory unit 10 screw
-  push();
-  noStroke();
-  fill(150, 150, 150);
-  ellipse(220, 388.75, 15);
-  pop();
+    //memory unit 10 screw
+    push();
+    noStroke();
+    fill(150, 150, 150);
+    ellipse(220, 388.75, 15);
+    pop();
 
-  //memory unit 11 screw
-  push();
-  noStroke();
-  fill(150, 150, 150);
-  ellipse(270, 388.75, 15);
-  pop();
+    //memory unit 11 screw
+    push();
+    noStroke();
+    fill(150, 150, 150);
+    ellipse(270, 388.75, 15);
+    pop();
 
-  //memory unit 12 screw
-  push();
-  noStroke();
-  fill(150, 150, 150);
-  ellipse(320, 388.75, 15);
-  pop();
+    //memory unit 12 screw
+    push();
+    noStroke();
+    fill(150, 150, 150);
+    ellipse(320, 388.75, 15);
+    pop();
 
-  //memory unit 13 screw
-  push();
-  noStroke();
-  fill(150, 150, 150);
-  ellipse(370, 388.75, 15);
-  pop();
+    //memory unit 13 screw
+    push();
+    noStroke();
+    fill(150, 150, 150);
+    ellipse(370, 388.75, 15);
+    pop();
 
-  //memory unit 14 screw
-  push();
-  noStroke();
-  fill(150, 150, 150);
-  ellipse(420, 388.75, 15);
-  pop();
+    //memory unit 14 screw
+    push();
+    noStroke();
+    fill(150, 150, 150);
+    ellipse(420, 388.75, 15);
+    pop();
 
-  //memory unit 15 screw
-  push();
-  noStroke();
-  fill(150, 150, 150);
-  ellipse(470, 388.75, 15);
-  pop();
+    //memory unit 15 screw
+    push();
+    noStroke();
+    fill(150, 150, 150);
+    ellipse(470, 388.75, 15);
+    pop();
 
-  //memory unit 16 screw
-  push();
-  noStroke();
-  fill(150, 150, 150);
-  ellipse(520, 388.75, 15);
-  pop();
+    //memory unit 16 screw
+    push();
+    noStroke();
+    fill(150, 150, 150);
+    ellipse(520, 388.75, 15);
+    pop();
 
-}
-drawFadeShape(){
-  push();
-  rectMode(CENTER);
-  fill(0, 0, 0, fadeAmount);
-  noStroke();
-  rect(width/2, height/2, width, height);
-  pop();
-}
+  }
+  drawFadeShape() {
+    push();
+    rectMode(CENTER);
+    fill(0, 0, 0, fadeAmount);
+    noStroke();
+    rect(width / 2, height / 2, width, height);
+    pop();
+  }
 }

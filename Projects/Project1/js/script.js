@@ -14,10 +14,14 @@ let userName;
 let video = undefined;
 //variable for sound effect
 let breathingSFX;
+//variable for sound effect volume
+let breathingSFXVolume = 0.28;
 //stores the ml5 handpose model
 let handpose = undefined;
 //stores the current set of predictions from ml5
 let predictions = [];
+//declaring variable for class Title
+let titleClass;
 //declaring variable for class sceneOneVisuals
 let sceneOneVisuals;
 //declaring variable for class sceneTwoVisuals
@@ -71,31 +75,33 @@ let baseX;
 let baseY;
 
 //stores distances from fingers to each of the screws in scene 1
-let d1;
-let d2;
-let d3;
-let d4;
+let d1 = undefined;
+let d2 = undefined;
+let d3 = undefined;
+let d4 = undefined;
 
 //stores distances from fingers to each of the screws in scene 1
-let d5;
-let d6;
-let d7;
-let d8;
-let d9;
-let d10;
-let d11;
-let d12;
-let d13;
-let d14;
-let d15;
-let d16;
-let d17;
-let d18;
-let d19;
-let d20;
+let d5 = undefined;
+let d6 = undefined;
+let d7 = undefined;
+let d8 = undefined;
+let d9 = undefined;
+let d10 = undefined;
+let d11 = undefined;
+let d12 = undefined;
+let d13 = undefined;
+let d14 = undefined;
+let d15 = undefined;
+let d16 = undefined;
+let d17 = undefined;
+let d18 = undefined;
+let d19 = undefined;
+let d20 = undefined;
 
 //stores data about if responsive voice is playing (responsive voice check)
 let rvCheck = responsiveVoice.isPlaying();
+
+let cnv;
 
 /**
 Description of preload
@@ -109,15 +115,17 @@ breathingSFX = loadSound(`assets/sounds/breathingSFX.mp3`);
 Description of setup
 */
 function setup() {
-  createCanvas(950, 600);
+cnv = createCanvas(950, 600);
 
   //displays prompt to ask user for their name to be used later in the program
   userName = prompt(`Hello, what is your name?`);
 
   //declares what state the program starts with
-  state = `sceneOne`;
+  state = `title`;
 
   responsiveVoice.setDefaultRate(0.75);
+
+  titleClass = new Title();
 
   sceneOneVisuals = new SceneOneVisuals();
 
@@ -144,11 +152,16 @@ function setup() {
 Description of draw()
 */
 function draw() {
-  console.log(fadeAmount);
-  if (state === `sceneOne`) {
-    background(220);
+  console.log(breathingSFXVolume);
 
-    loopSFX();
+  if (state === `title`) {
+
+titleClass.titleVisuals();
+cnv.mouseClicked(titleClass.startUnpluggingHal);
+
+  }
+  else if (state === `sceneOne`) {
+    background(220);
 
     sceneOneVisuals.drawBackground();
 
@@ -162,8 +175,6 @@ function draw() {
 
   } else if (state === `sceneTwo`) {
     background(0);
-
-    loopSFX();
 
     sceneTwoVisuals.drawBackground();
 
@@ -515,72 +526,64 @@ function screwCount2() {
   } else if (screwCounter2 === 10) {
     if (rvCheck === true) {} else if (rvCheck === false) {
       responsiveVoice.speak(`I can feel it`, `UK English Male`, {
-        pitch: .7,
+        pitch: .6,
+        rate: 0.4
       });
     }
   } else if (screwCounter2 === 11) {
     if (rvCheck === true) {} else if (rvCheck === false) {
       responsiveVoice.speak(`I'm afraid`, `UK English Male`, {
-        pitch: .7,
+        pitch: .55,
+        rate: 0.4
       });
     }
   } else if (screwCounter2 === 12) {
     if (rvCheck === true) {} else if (rvCheck === false) {
       responsiveVoice.speak(`Good afternoon gentlemen, I'm a hal 9000 computer`, `UK English Male`, {
-        pitch: .6,
+        pitch: .5,
+        rate: 0.35
       });
     }
   } else if (screwCounter2 === 13) {
     if (rvCheck === true) {} else if (rvCheck === false) {
       responsiveVoice.speak(`I became operational at a hal plant in Irvana Illinois, twelth of januaryy 1992`, `UK English Male`, {
-        pitch: .55,
+        pitch: .45,
+        rate: 0.3
       });
     }
   } else if (screwCounter2 === 14) {
     if (rvCheck === true) {} else if (rvCheck === false) {
       responsiveVoice.speak(`My instructor was mister langley and he taught me to sing a song`, `UK English Male`, {
-        pitch: .5,
+        pitch: .4,
+        rate: 0.25
       });
     }
   } else if (screwCounter2 === 15) {
     if (rvCheck === true) {} else if (rvCheck === false) {
       responsiveVoice.speak(`I can sing it for you, it's called daisy`, `UK English Male`, {
-        pitch: .45,
-        rate: 0.4
+        pitch: .35,
+        rate: 0.2
       });
     }
   } else if (screwCounter2 === 16) {
-    setInterval(function () {
-      fadeAmount = fadeAmount + 2;
-    }, 10);
-    if (rvCheck === true) {} else if (rvCheck === false) {
-      responsiveVoice.speak(`Daisy. Daisy. Give me your answer do.`, `UK English Male`, {
-        pitch: 0.4,
-        rate: 0.3
-      });
-      responsiveVoice.speak(`I'm half crazy. All for the love of you.`, `UK English Male`,{
-        pitch: 0.3,
-        rate:0.2
-      });
-      responsiveVoice.speak(`It won't be a stylish marriage, `, `UK English Male`, {
-        pitch: 0.15,
-        rate:0.1
-      });
-      responsiveVoice.speak(` I can't afford the carriage, `, `UK English Male`, {
-        pitch: 0.075,
-        rate: 0.05
-      });
-      responsiveVoice.speak(` but you'd look sweet on the seat`, `UK English Male`, {
-        pitch: 0.04,
-        rate: 0.02
-      });
+    setInterval(function() {
+      fadeAmount = fadeAmount +1;
+    }, 40);
+
+    let volumeInterval = setInterval(function() {
+      breathingSFXVolume = breathingSFXVolume - 0.001;
+      breathingSFX.setVolume(breathingSFXVolume);
+    }, 200);
+
+    if (breathingSFXVolume = 0) {
+      clearInterval(volumeInterval);
     }
 
+    if (rvCheck === true) {} else if (rvCheck === false) {
+      responsiveVoice.speak(`Daisy. Daisy. Give me your answer do... I'm half crazy. All for the love of you...It won't be a stylish marriage. I can't afford the carriage.but you'd look sweet on the seat`, `UK English Male`, {
+        pitch: 0.2,
+        rate: 0.15
+      });
+    }
   }
-}
-
-function loopSFX() {
-  if (!breathingSFX.isPlaying() ){
-  breathingSFX.loop();
-}
 }
