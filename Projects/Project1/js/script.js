@@ -12,6 +12,8 @@ author, and this description to match your project!
 let userName;
 //stores the user's webcam
 let video = undefined;
+//variable for sound effect
+let breathingSFX;
 //stores the ml5 handpose model
 let handpose = undefined;
 //stores the current set of predictions from ml5
@@ -99,7 +101,7 @@ let rvCheck = responsiveVoice.isPlaying();
 Description of preload
 */
 function preload() {
-
+breathingSFX = loadSound(`assets/sounds/breathingSFX.mp3`);
 }
 
 
@@ -146,6 +148,8 @@ function draw() {
   if (state === `sceneOne`) {
     background(220);
 
+    loopSFX();
+
     sceneOneVisuals.drawBackground();
 
     sceneOneVisuals.drawScrews();
@@ -158,6 +162,8 @@ function draw() {
 
   } else if (state === `sceneTwo`) {
     background(0);
+
+    loopSFX();
 
     sceneTwoVisuals.drawBackground();
 
@@ -571,4 +577,10 @@ function screwCount2() {
     }
 
   }
+}
+
+function loopSFX() {
+  if (!breathingSFX.isPlaying() ){
+  breathingSFX.loop();
+}
 }
