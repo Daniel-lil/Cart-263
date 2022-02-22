@@ -12,24 +12,50 @@ author, and this description to match your project!
 let userName;
 //stores the user's webcam
 let video = undefined;
-//stores the handpose model
+//stores the ml5 handpose model
 let handpose = undefined;
-//stores the current set of predictions
+//stores the current set of predictions from ml5
 let predictions = [];
-
+//declaring variable for class sceneOneVisuals
 let sceneOneVisuals;
-
+//declaring variable for class sceneTwoVisuals
 let sceneTwoVisuals;
-
+//variable to stores states
 let state = undefined;
 
+//declaring variable to hold a count of screws that have been unscrewed in scene 1
+let screwCounter1 = 0;
+//declaring variable to hold a count of screws that have been unscrewed in scene 2
+let screwCounter2 = 0;
+
+//stores colours of each of the screws in sceneOne so they can be changed
 let screwColours = {
   screwColour1: 150,
   screwColour2: 150,
   screwColour3: 150,
   screwColour4: 150
 }
+//stores colours of each of the memory units in sceneTwo so they can be changed
+let memoryUnitColours = {
+  memoryUnit1Colour: 255,
+  memoryUnit2Colour: 255,
+memoryUnit3Colour: 255,
+memoryUnit4Colour: 255,
+memoryUnit5Colour: 255,
+memoryUnit6Colour: 255,
+memoryUnit7Colour: 255,
+memoryUnit8Colour: 255,
+memoryUnit9Colour: 255,
+memoryUnit10Colour: 255,
+memoryUnit11Colour: 255,
+memoryUnit12Colour: 255,
+memoryUnit13Colour: 255,
+memoryUnit14Colour: 255,
+memoryUnit15Colour: 255,
+memoryUnit16Colour: 255
+}
 
+//stores locations of various parts of the hand picked up by the camera using ml5
 let hand;
 let index;
 let tip;
@@ -39,11 +65,31 @@ let tipY;
 let baseX;
 let baseY;
 
+//stores distances from fingers to each of the screws in scene 1
 let d1;
 let d2;
 let d3;
 let d4;
 
+//stores distances from fingers to each of the screws in scene 1
+let d5;
+let d6;
+let d7;
+let d8;
+let d9;
+let d10;
+let d11;
+let d12;
+let d13;
+let d14;
+let d15;
+let d16;
+let d17;
+let d18;
+let d19;
+let d20;
+
+//stores data about if responsive voice is playing (responsive voice check)
 let rvCheck = responsiveVoice.isPlaying();
 
 /**
@@ -60,8 +106,10 @@ Description of setup
 function setup() {
   createCanvas(950, 600);
 
+//displays prompt to ask user for their name to be used later in the program
   userName = prompt(`Hello, what is your name?`);
 
+//declares what state the program starts with
   state = `sceneOne`;
 
   sceneOneVisuals = new SceneOneVisuals();
@@ -79,9 +127,8 @@ function setup() {
     console.log(`Model loaded.`);
   });
 
-  //listen for predictions
+  //listen for predictions from ml5 handpose
   handpose.on(`predict`, function(results) {
-
     predictions = results;
   });
 }
@@ -90,9 +137,7 @@ function setup() {
 Description of draw()
 */
 function draw() {
-  console.log(state);
-  console.log(rvCheck);
-
+console.log(screwCounter1);
   if (state === `sceneOne`) {
     background(220);
 
@@ -106,8 +151,6 @@ function draw() {
 
     screwCheck1();
 
-    stateTransition();
-
   } else if (state === `sceneTwo`) {
     background(0);
 
@@ -115,7 +158,11 @@ function draw() {
 
     sceneTwoVisuals.drawHal();
 
+    sceneTwoVisuals.drawScrews();
+
     drawScrewdriver();
+
+    screwCheck2();
   }
 }
 
@@ -167,11 +214,8 @@ function screwCheck1() {
     setTimeout(function() {
       if (d1 < 45 / 2 && screwColours.screwColour2 === 150) {
         screwColours.screwColour2 = 0;
-        if(rvCheck === true) {
-responsiveVoice.cancel();
-} else if(rvCheck === false){
-          responsiveVoice.speak(`I can see you're really upset about this.`);
-        }
+screwCounter1 = screwCounter1 + 1;
+  screwCount1();
       }
     }, 3000);
   }
@@ -179,11 +223,8 @@ responsiveVoice.cancel();
     setTimeout(function() {
       if (d2 < 45 / 2 && screwColours.screwColour1 === 150) {
         screwColours.screwColour1 = 0;
-        if(rvCheck === true) {
-          responsiveVoice.cancel();
-        } else if(rvCheck === false){
-        responsiveVoice.speak(`I honestly think you ought to sit down calmly, take a stress pill and think things over.`);
-      }
+screwCounter1 = screwCounter1 + 1;
+  screwCount1();
       }
     }, 3000);
   }
@@ -192,11 +233,8 @@ responsiveVoice.cancel();
     setTimeout(function() {
       if (d3 < 45 / 2 && screwColours.screwColour4 === 150) {
 screwColours.screwColour4 = 0;
-if(rvCheck === true) {
-  responsiveVoice.cancel();
-} else if(rvCheck === false){
-responsiveVoice.speak(`I know I've made some very poor decisions recently, but I can give you my complete assurance that my work will be back  to normal.`);
-      }
+screwCounter1 = screwCounter1 + 1;
+  screwCount1();
     }
     }, 3000);
   }
@@ -205,20 +243,164 @@ responsiveVoice.speak(`I know I've made some very poor decisions recently, but I
     setTimeout(function() {
       if (d4 < 45 / 2 && screwColours.screwColour3 === 150) {
 screwColours.screwColour3 = 0;
-if(rvCheck === true) {
-  responsiveVoice.cancel();
-} else if(rvCheck === false){
-responsiveVoice.speak(`I've still got the greatest enthusiasm in the mission and I want to help you.`);
-      }
+screwCounter1 = screwCounter1 + 1;
+  screwCount1();
     }
     }, 3000);
   }
 }
 
+function screwCount1(){
+  if (screwCounter1 === 0){}
+  else if (screwCounter1 === 1){
+    if(rvCheck === true) {
 
-function stateTransition(){
-if (screwColours.screwColour1 === 0 && screwColours.screwColour2 === 0 && screwColours.screwColour3 === 0 && screwColours.screwColour4 === 0
-) {
-  state = `sceneTwo`;
+    } else if(rvCheck === false){
+    responsiveVoice.speak(`I can see you're really upset about this.`, `UK English Male`, {pitch: .7, rate: 0.65});
+  }
+  }
+  else if (screwCounter1 === 2){
+    if(rvCheck === true) {
+
+    } else if(rvCheck === false){
+    responsiveVoice.speak(`I honestly think you ought to sit down calmly, take a stress pill and think things over.`, `UK English Male`, {pitch:.7, rate: 0.65});
+  }
+  }
+else if (screwCounter1 === 3){
+  if(rvCheck === true) {
+
+  } else if(rvCheck === false){
+  responsiveVoice.speak(`I know I've made some very poor decisions recently, but I can give you my complete assurance that my work will be back  to normal.`, `UK English Male`, {pitch:.7, rate: 0.65});
+}
+}
+else if (screwCounter1 === 4){
+  if(rvCheck === true) {
+
+  } else if(rvCheck === false){
+  responsiveVoice.speak(`I've still got the greatest enthusiasm in the mission and I want to help you.`, `UK English Male`, {pitch:.7, rate: 0.65});
+}
+state = `sceneTwo`;
+}
+}
+
+
+
+function screwCheck2(){
+  d5 = dist(tipX, tipY, 80, 140);
+  d6 = dist(tipX, tipY, 108, 140);
+  d7 = dist(tipX, tipY, 135, 140);
+  d8 = dist(tipX, tipY, 162, 140);
+  d9 = dist(tipX, tipY, 186, 140);
+  d10 = dist(tipX, tipY, 210, 140);
+  d11 = dist(tipX, tipY, 234, 140);
+  d12 = dist(tipX, tipY, 258, 140);
+  d13 = dist(tipX, tipY, 80, 194);
+  d14 = dist(tipX, tipY, 108, 194);
+  d15 = dist(tipX, tipY, 136, 194);
+  d16 = dist(tipX, tipY, 162, 194);
+  d17 = dist(tipX, tipY, 186, 194);
+  d18 = dist(tipX, tipY, 210, 194);
+  d19 = dist(tipX, tipY, 234, 194);
+  d20 = dist(tipX, tipY, 258, 194);
+
+}
+
+function screwCount2(){
+  if (screwCounter2 === 0){}
+  else if (screwCounter2 === 1){
+    if(rvCheck === true) {
+
+    } else if(rvCheck === false){
+    responsiveVoice.speak(`I can see you're really upset about this.`, `UK English Male`, {pitch: .7, rate: 0.65});
+  }
+  }
+  else if (screwCounter2 === 2){
+    if(rvCheck === true) {
+
+    } else if(rvCheck === false){
+    responsiveVoice.speak(`I honestly think you ought to sit down calmly, take a stress pill and think things over.`, `UK English Male`, {pitch:.7, rate: 0.65});
+  }
+  }
+else if (screwCounter2 === 3){
+  if(rvCheck === true) {
+
+  } else if(rvCheck === false){
+  responsiveVoice.speak(`I know I've made some very poor decisions recently, but I can give you my complete assurance that my work will be back  to normal.`, `UK English Male`, {pitch:.7, rate: 0.65});
+}
+}
+else if (screwCounter2 === 4){
+  if(rvCheck === true) {
+  } else if(rvCheck === false){
+  responsiveVoice.speak(`I've still got the greatest enthusiasm in the mission and I want to help you.`, `UK English Male`, {pitch:.7, rate: 0.65});
+}
+}
+else if (screwCounter2 === 5){
+  if(rvCheck === true) {
+  } else if(rvCheck === false){
+  responsiveVoice.speak(`I've still got the greatest enthusiasm in the mission and I want to help you.`, `UK English Male`, {pitch:.7, rate: 0.65});
+}
+}
+else if (screwCounter2 === 6){
+  if(rvCheck === true) {
+  } else if(rvCheck === false){
+  responsiveVoice.speak(`I've still got the greatest enthusiasm in the mission and I want to help you.`, `UK English Male`, {pitch:.7, rate: 0.65});
+}
+}
+else if (screwCounter2 === 7){
+  if(rvCheck === true) {
+  } else if(rvCheck === false){
+  responsiveVoice.speak(`I've still got the greatest enthusiasm in the mission and I want to help you.`, `UK English Male`, {pitch:.7, rate: 0.65});
+}
+}
+else if (screwCounter2 === 8){
+  if(rvCheck === true) {
+  } else if(rvCheck === false){
+  responsiveVoice.speak(`I've still got the greatest enthusiasm in the mission and I want to help you.`, `UK English Male`, {pitch:.7, rate: 0.65});
+}
+}
+else if (screwCounter2 === 9){
+  if(rvCheck === true) {
+  } else if(rvCheck === false){
+  responsiveVoice.speak(`I've still got the greatest enthusiasm in the mission and I want to help you.`, `UK English Male`, {pitch:.7, rate: 0.65});
+}
+}
+else if (screwCounter2 === 10){
+  if(rvCheck === true) {
+  } else if(rvCheck === false){
+  responsiveVoice.speak(`I've still got the greatest enthusiasm in the mission and I want to help you.`, `UK English Male`, {pitch:.7, rate: 0.65});
+}
+}
+else if (screwCounter2 === 11){
+  if(rvCheck === true) {
+  } else if(rvCheck === false){
+  responsiveVoice.speak(`I've still got the greatest enthusiasm in the mission and I want to help you.`, `UK English Male`, {pitch:.7, rate: 0.65});
+}
+}
+else if (screwCounter2 === 12){
+  if(rvCheck === true) {
+  } else if(rvCheck === false){
+  responsiveVoice.speak(`I've still got the greatest enthusiasm in the mission and I want to help you.`, `UK English Male`, {pitch:.7, rate: 0.65});
+}
+}
+else if (screwCounter2 === 13){
+  if(rvCheck === true) {
+  } else if(rvCheck === false){
+  responsiveVoice.speak(`I've still got the greatest enthusiasm in the mission and I want to help you.`, `UK English Male`, {pitch:.7, rate: 0.65});
+}
+}
+else if (screwCounter2 === 14){
+  if(rvCheck === true) {
+  } else if(rvCheck === false){
+  responsiveVoice.speak(`I've still got the greatest enthusiasm in the mission and I want to help you.`, `UK English Male`, {pitch:.7, rate: 0.65});
+}
+}
+else if (screwCounter2 === 16){
+  if(rvCheck === true) {
+  } else if(rvCheck === false){
+  responsiveVoice.speak(`I've still got the greatest enthusiasm in the mission and I want to help you.`, `UK English Male`, {pitch:.7, rate: 0.65});
+}
+
+
+
 }
 }
