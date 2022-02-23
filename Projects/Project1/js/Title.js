@@ -114,8 +114,8 @@ class Title {
   titleText() {
     push();
     textAlign(CENTER);
-    fill(130, 0, 0);
-    stroke(130, 0, 0);
+    fill(160, 0, 0);
+    stroke(160, 0, 0);
     strokeWeight(5);
     textSize(68);
     text(`U N P L U G G I N G     H A L`, width / 2, 196.5);
@@ -123,8 +123,8 @@ class Title {
 
     push();
     textAlign(CENTER);
-    fill(130, 0, 0);
-    stroke(130, 0, 0);
+    fill(160, 0, 0);
+    stroke(160, 0, 0);
     strokeWeight(1);
     textSize(25);
     text(`YOU MUST DISABLE HAL 9000 BY USING YOUR HAND AS A SCREWDRIVER`, width / 2, 392.5);
@@ -132,8 +132,8 @@ class Title {
 
     push();
     textAlign(CENTER);
-    fill(130, 0, 0);
-    stroke(130, 0, 0);
+    fill(160, 0, 0);
+    stroke(160, 0, 0);
     strokeWeight(1);
     textSize(20);
     text(`CLICK ON THE SCREEN TO BEGIN`, width / 2, 480);

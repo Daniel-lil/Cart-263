@@ -233,6 +233,7 @@ console.log(d14);
   }
 }
 
+//draw the screwdriver
 function drawScrewdriver() {
   if (predictions.length > 0) {
     hand = predictions[0];
