@@ -205,10 +205,12 @@ function draw() {
 //tells program what functions to run if the program is in the scene 1 state
   } else if (state === `sceneOne`) {
 
-    background(220);
+    background(240);
     sceneOneVisuals.drawBackground();
     sceneOneVisuals.drawScrews();
     sceneOneVisuals.drawHal();
+    sceneOneVisuals.drawHalLogo();
+    sceneOneVisuals.sceneOneText();
     drawScrewdriver();
     sceneOneScrewCheck.screwCheck1();
 
@@ -219,6 +221,7 @@ function draw() {
     sceneTwoVisuals.drawBackground();
     sceneTwoVisuals.drawHal();
     sceneTwoVisuals.drawScrews();
+    sceneTwoVisuals.sceneTwoText();
     drawScrewdriver();
     sceneTwoScrewCheck.screwCheck2();
     sceneTwoVisuals.drawFadeShape();

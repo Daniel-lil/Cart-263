@@ -116,7 +116,7 @@ class SceneTwoAudio {
 
 
       if (rvCheck === true) {} else if (rvCheck === false) {
-        responsiveVoice.speak(`Daisy. Daisy. Give me your answer do... I'm half crazy. All for the love of you...It won't be a stylish marriage. I can't afford the carriage.but you'd look sweet on the seat`, `UK English Male`, {
+        responsiveVoice.speak(`Daisy. Daisy. Give me your answer do. I'm half crazy. All for the love of you. It won't be a stylish marriage. I can't afford the carriage. But you'd look sweet on the seat`, `UK English Male`, {
           pitch: 0.2,
           rate: 0.15
         });
