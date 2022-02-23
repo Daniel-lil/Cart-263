@@ -338,8 +338,9 @@ class SceneTwoVisuals {
     fill(150, 150, 150);
     ellipse(520, 388.75, 15);
     pop();
-
   }
+
+  //draws black square over screen - used for fade out at the end
   drawFadeShape() {
     push();
     rectMode(CENTER);

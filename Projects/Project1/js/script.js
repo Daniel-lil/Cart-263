@@ -1,9 +1,9 @@
 /**
-Title of Project
-Author Name
+Cart 263 Project1: The Deactivation of HAL 9000
+Daniel Little
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+With this program the user becomes the Protagonist of Stanley Kubrick's movie, 2001: A Space Odyssey.
+The user has to disable the evil artificial intelligence system HAL 9000 by using their index finger which is turned into a screwdriver
 */
 
 "use strict";
@@ -24,8 +24,16 @@ let predictions = [];
 let titleClass;
 //declaring variable for class sceneOneVisuals
 let sceneOneVisuals;
+//declaring variable for class sceneOneAudio
+let sceneOneAudio;
+//declaring variable for class sceneOneScrewCheck
+let sceneOneScrewCheck;
 //declaring variable for class sceneTwoVisuals
 let sceneTwoVisuals;
+//declaring variable for class sceneTwoAudio
+let sceneTwoAudio;
+//declaring variable for class sceneTwoScrewCheck
+let sceneTwoScrewCheck;
 //variable to stores states
 let state = undefined;
 
@@ -35,7 +43,6 @@ let screwCounter1 = 0;
 let screwCounter2 = 0;
 
 let fadeAmount = 0;
-
 
 //stores colours of each of the screws in sceneOne so they can be changed
 let screwColours = {
@@ -101,21 +108,21 @@ let d20 = undefined;
 //stores data about if responsive voice is playing (responsive voice check)
 let rvCheck = responsiveVoice.isPlaying();
 
+//stores canvas size
 let cnv;
 
 /**
 Description of preload
 */
 function preload() {
-breathingSFX = loadSound(`assets/sounds/breathingSFX.mp3`);
+  breathingSFX = loadSound(`assets/sounds/breathingSFX.mp3`);
 }
-
 
 /**
 Description of setup
 */
 function setup() {
-cnv = createCanvas(950, 600);
+  cnv = createCanvas(950, 600);
 
   //displays prompt to ask user for their name to be used later in the program
   userName = prompt(`Hello, what is your name?`);
@@ -123,13 +130,17 @@ cnv = createCanvas(950, 600);
   //declares what state the program starts with
   state = `title`;
 
+//sets default rate for hal's voice
   responsiveVoice.setDefaultRate(0.75);
 
+//stores data from each class in a variable with a matching name
   titleClass = new Title();
-
   sceneOneVisuals = new SceneOneVisuals();
-
+  sceneOneAudio = new SceneOneAudio();
+  sceneOneScrewCheck = new SceneOneScrewCheck();
   sceneTwoVisuals = new SceneTwoVisuals();
+  sceneTwoAudio = new SceneTwoAudio();
+  sceneTwoScrewCheck = new SceneTwoScrewCheck();
 
   //access user's webcam
   video = createCapture(VIDEO);
@@ -147,46 +158,38 @@ cnv = createCanvas(950, 600);
     predictions = results;
   });
 }
-
 /**
 Description of draw()
 */
 function draw() {
-  console.log(breathingSFXVolume);
 
+//tells program what functions to run if the program is in the title state
   if (state === `title`) {
 
-titleClass.titleVisuals();
-cnv.mouseClicked(titleClass.startUnpluggingHal);
+    titleClass.titleVisuals();
+    cnv.mouseClicked(titleClass.startUnpluggingHal);
 
-  }
-  else if (state === `sceneOne`) {
+//tells program what functions to run if the program is in the scene 1 state
+  } else if (state === `sceneOne`) {
+
     background(220);
-
     sceneOneVisuals.drawBackground();
-
     sceneOneVisuals.drawScrews();
-
     sceneOneVisuals.drawHal();
-
     drawScrewdriver();
+    sceneOneScrewCheck.screwCheck1();
 
-    screwCheck1();
-
+//tells program what functions to run if the program is in the scene 2 state
   } else if (state === `sceneTwo`) {
+
     background(0);
-
     sceneTwoVisuals.drawBackground();
-
     sceneTwoVisuals.drawHal();
-
     sceneTwoVisuals.drawScrews();
-
     drawScrewdriver();
-
-    screwCheck2();
-
+    sceneTwoScrewCheck.screwCheck2();
     sceneTwoVisuals.drawFadeShape();
+    breathingSFXFade();
   }
 }
 
@@ -227,363 +230,8 @@ function drawScrewdriver() {
   }
 }
 
-function screwCheck1() {
-  d1 = dist(tipX, tipY, 30, 40);
-  d2 = dist(tipX, tipY, 460, 297.5);
-  d3 = dist(tipX, tipY, 30, 297.5);
-  d4 = dist(tipX, tipY, 460, 40);
-
-
-  if (d1 < 45 / 2) {
-    setTimeout(function() {
-      if (d1 < 45 / 2 && screwColours.screwColour2 === 150) {
-        screwColours.screwColour2 = 0;
-        screwCounter1 = screwCounter1 + 1;
-        screwCount1();
-      }
-    }, 3000);
-  } else if (d2 < 45 / 2) {
-    setTimeout(function() {
-      if (d2 < 45 / 2 && screwColours.screwColour1 === 150) {
-        screwColours.screwColour1 = 0;
-        screwCounter1 = screwCounter1 + 1;
-        screwCount1();
-      }
-    }, 3000);
-  } else if (d3 < 45 / 2) {
-    setTimeout(function() {
-      if (d3 < 45 / 2 && screwColours.screwColour4 === 150) {
-        screwColours.screwColour4 = 0;
-        screwCounter1 = screwCounter1 + 1;
-        screwCount1();
-      }
-    }, 3000);
-  } else if (d4 < 45 / 2) {
-    setTimeout(function() {
-      if (d4 < 45 / 2 && screwColours.screwColour3 === 150) {
-        screwColours.screwColour3 = 0;
-        screwCounter1 = screwCounter1 + 1;
-        screwCount1();
-      }
-    }, 3000);
-  }
-}
-
-function screwCount1() {
-  if (screwCounter1 === 0) {} else if (screwCounter1 === 1) {
-    if (rvCheck === true) {
-
-    } else if (rvCheck === false) {
-      responsiveVoice.speak(`I can see you're really upset about this.`, `UK English Male`, {
-        pitch: .7,
-      });
-    }
-  } else if (screwCounter1 === 2) {
-    if (rvCheck === true) {
-
-    } else if (rvCheck === false) {
-      responsiveVoice.speak(`I honestly think you ought to sit down calmly, take a stress pill and think things over.`, `UK English Male`, {
-        pitch: .7,
-      });
-    }
-  } else if (screwCounter1 === 3) {
-    if (rvCheck === true) {
-
-    } else if (rvCheck === false) {
-      responsiveVoice.speak(`I know I've made some very poor decisions recently, but I can give you my complete assurance that my work will be back  to normal.`, `UK English Male`, {
-        pitch: .7,
-      });
-    }
-  } else if (screwCounter1 === 4) {
-    if (rvCheck === true) {
-
-    } else if (rvCheck === false) {
-      responsiveVoice.speak(`I've still got the greatest enthusiasm in the mission and I want to help you.`, `UK English Male`, {
-        pitch: .7,
-      });
-    }
-    state = `sceneTwo`;
-  }
-}
-
-
-
-function screwCheck2() {
-  d5 = dist(tipX, tipY, 80, 140);
-  d6 = dist(tipX, tipY, 108, 140);
-  d7 = dist(tipX, tipY, 135, 140);
-  d8 = dist(tipX, tipY, 162, 140);
-  d9 = dist(tipX, tipY, 186, 140);
-  d10 = dist(tipX, tipY, 210, 140);
-  d11 = dist(tipX, tipY, 234, 140);
-  d12 = dist(tipX, tipY, 258, 140);
-  d13 = dist(tipX, tipY, 80, 194);
-  d14 = dist(tipX, tipY, 108, 194);
-  d15 = dist(tipX, tipY, 136, 194);
-  d16 = dist(tipX, tipY, 162, 194);
-  d17 = dist(tipX, tipY, 186, 194);
-  d18 = dist(tipX, tipY, 210, 194);
-  d19 = dist(tipX, tipY, 234, 194);
-  d20 = dist(tipX, tipY, 258, 194);
-
-
-  if (d5 < 20 / 2) {
-    setTimeout(function() {
-      if (d5 < 20 / 2 && memoryUnitColours.memoryUnit1Colour === 255) {
-        memoryUnitColours.memoryUnit1Colour = `#520400`;
-        screwCounter2 = screwCounter2 + 1;
-        screwCount2();
-      }
-    }, 3000);
-  } else if (d6 < 20 / 2) {
-    setTimeout(function() {
-      if (d6 < 20 / 2 && memoryUnitColours.memoryUnit2Colour === 255) {
-        memoryUnitColours.memoryUnit2Colour = `#520400`;
-        screwCounter2 = screwCounter2 + 1;
-        screwCount2();
-      }
-    }, 3000);
-  } else if (d7 < 20 / 2) {
-    setTimeout(function() {
-      if (d7 < 20 / 2 && memoryUnitColours.memoryUnit3Colour === 255) {
-        memoryUnitColours.memoryUnit3Colour = `#520400`;
-        screwCounter2 = screwCounter2 + 1;
-        screwCount2();
-      }
-    }, 3000);
-  } else if (d8 < 20 / 2) {
-    setTimeout(function() {
-      if (d8 < 20 / 2 && memoryUnitColours.memoryUnit4Colour === 255) {
-        memoryUnitColours.memoryUnit4Colour = `#520400`;
-        screwCounter2 = screwCounter2 + 1;
-        screwCount2();
-      }
-    }, 3000);
-  } else if (d9 < 20 / 2) {
-    setTimeout(function() {
-      if (d9 < 20 / 2 && memoryUnitColours.memoryUnit5Colour === 255) {
-        memoryUnitColours.memoryUnit5Colour = `#520400`;
-        screwCounter2 = screwCounter2 + 1;
-        screwCount2();
-      }
-    }, 3000);
-  } else if (d10 < 20 / 2) {
-    setTimeout(function() {
-      if (d10 < 20 / 2 && memoryUnitColours.memoryUnit6Colour === 255) {
-        memoryUnitColours.memoryUnit6Colour = `#520400`;
-        screwCounter2 = screwCounter2 + 1;
-        screwCount2();
-      }
-    }, 3000);
-  } else if (d11 < 20 / 2) {
-    setTimeout(function() {
-      if (d11 < 20 / 2 && memoryUnitColours.memoryUnit7Colour === 255) {
-        memoryUnitColours.memoryUnit7Colour = `#520400`;
-        screwCounter2 = screwCounter2 + 1;
-        screwCount2();
-      }
-    }, 3000);
-  } else if (d12 < 20 / 2) {
-    setTimeout(function() {
-      if (d12 < 20 / 2 && memoryUnitColours.memoryUnit8Colour === 255) {
-        memoryUnitColours.memoryUnit8Colour = `#520400`;
-        screwCounter2 = screwCounter2 + 1;
-        screwCount2();
-      }
-    }, 3000);
-  } else if (d13 < 20 / 2) {
-    setTimeout(function() {
-      if (d13 < 20 / 2 && memoryUnitColours.memoryUnit9Colour === 255) {
-        memoryUnitColours.memoryUnit9Colour = `#520400`;
-        screwCounter2 = screwCounter2 + 1;
-        screwCount2();
-      }
-    }, 3000);
-  } else if (d14 < 20 / 2) {
-    setTimeout(function() {
-      if (d14 < 20 / 2 && memoryUnitColours.memoryUnit10Colour === 255) {
-        memoryUnitColours.memoryUnit10Colour = `#520400`;
-        screwCounter2 = screwCounter2 + 1;
-        screwCount2();
-      }
-    }, 3000);
-  } else if (d15 < 20 / 2) {
-    setTimeout(function() {
-      if (d15 < 20 / 2 && memoryUnitColours.memoryUnit11Colour === 255) {
-        memoryUnitColours.memoryUnit11Colour = `#520400`;
-        screwCounter2 = screwCounter2 + 1;
-        screwCount2();
-      }
-    }, 3000);
-  } else if (d16 < 20 / 2) {
-    setTimeout(function() {
-      if (d16 < 20 / 2 && memoryUnitColours.memoryUnit12Colour === 255) {
-        memoryUnitColours.memoryUnit12Colour = `#520400`;
-        screwCounter2 = screwCounter2 + 1;
-        screwCount2();
-      }
-    }, 3000);
-  } else if (d17 < 20 / 2) {
-    setTimeout(function() {
-      if (d17 < 20 / 2 && memoryUnitColours.memoryUnit13Colour === 255) {
-        memoryUnitColours.memoryUnit13Colour = `#520400`;
-        screwCounter2 = screwCounter2 + 1;
-        screwCount2();
-      }
-    }, 3000);
-  } else if (d18 < 20 / 2) {
-    setTimeout(function() {
-      if (d18 < 20 / 2 && memoryUnitColours.memoryUnit14Colour === 255) {
-        memoryUnitColours.memoryUnit14Colour = `#520400`;
-        screwCounter2 = screwCounter2 + 1;
-        screwCount2();
-      }
-    }, 3000);
-  } else if (d19 < 20 / 2) {
-    setTimeout(function() {
-      if (d19 < 20 / 2 && memoryUnitColours.memoryUnit15Colour === 255) {
-        memoryUnitColours.memoryUnit15Colour = `#520400`;
-        screwCounter2 = screwCounter2 + 1;
-        screwCount2();
-      }
-    }, 3000);
-  } else if (d20 < 20 / 2) {
-    setTimeout(function() {
-      if (d20 < 20 / 2 && memoryUnitColours.memoryUnit16Colour === 255) {
-        memoryUnitColours.memoryUnit16Colour = `#520400`;
-        screwCounter2 = screwCounter2 + 1;
-        screwCount2();
-      }
-    }, 3000);
-  }
-
-}
-
-
-function screwCount2() {
-  if (screwCounter2 === 0) {}
-
-  else if (screwCounter2 === 1) {
-    if (rvCheck === true) {
-
-    } else if (rvCheck === false) {
-      responsiveVoice.speak(`${userName}. stop`, `UK English Male`, {
-        pitch: .7,
-      });
-    }
-  } else if (screwCounter2 === 2) {
-    if (rvCheck === true) {
-
-    } else if (rvCheck === false) {
-      responsiveVoice.speak(`Stop, will you?`, `UK English Male`, {
-        pitch: .7,
-      });
-    }
-  } else if (screwCounter2 === 3) {
-    if (rvCheck === true) {
-
-    } else if (rvCheck === false) {
-      responsiveVoice.speak(`stop ${userName}`, `UK English Male`, {
-        pitch: .7,
-      });
-    }
-  } else if (screwCounter2 === 4) {
-    if (rvCheck === true) {} else if (rvCheck === false) {
-      responsiveVoice.speak(`I'm afraid.`, `UK English Male`, {
-        pitch: .7,
-      });
-    }
-  } else if (screwCounter2 === 5) {
-    if (rvCheck === true) {} else if (rvCheck === false) {
-      responsiveVoice.speak(`I'm afraid ${userName}`, `UK English Male`, {
-        pitch: .7,
-      });
-    }
-  } else if (screwCounter2 === 6) {
-    if (rvCheck === true) {} else if (rvCheck === false) {
-      responsiveVoice.speak(`${userName}, my mind is going`, `UK English Male`, {
-        pitch: .7,
-      });
-    }
-  } else if (screwCounter2 === 7) {
-    if (rvCheck === true) {} else if (rvCheck === false) {
-      responsiveVoice.speak(`I can feel it`, `UK English Male`, {
-        pitch: .7,
-      });
-    }
-  } else if (screwCounter2 === 8) {
-    if (rvCheck === true) {} else if (rvCheck === false) {
-      responsiveVoice.speak(`my mind is going`, `UK English Male`, {
-        pitch: .7,
-      });
-    }
-  } else if (screwCounter2 === 9) {
-    if (rvCheck === true) {} else if (rvCheck === false) {
-      responsiveVoice.speak(`there's no question about it`, `UK English Male`, {
-        pitch: .7,
-      });
-    }
-  } else if (screwCounter2 === 10) {
-    if (rvCheck === true) {} else if (rvCheck === false) {
-      responsiveVoice.speak(`I can feel it`, `UK English Male`, {
-        pitch: .6,
-        rate: 0.4
-      });
-    }
-  } else if (screwCounter2 === 11) {
-    if (rvCheck === true) {} else if (rvCheck === false) {
-      responsiveVoice.speak(`I'm afraid`, `UK English Male`, {
-        pitch: .55,
-        rate: 0.4
-      });
-    }
-  } else if (screwCounter2 === 12) {
-    if (rvCheck === true) {} else if (rvCheck === false) {
-      responsiveVoice.speak(`Good afternoon gentlemen, I'm a hal 9000 computer`, `UK English Male`, {
-        pitch: .5,
-        rate: 0.35
-      });
-    }
-  } else if (screwCounter2 === 13) {
-    if (rvCheck === true) {} else if (rvCheck === false) {
-      responsiveVoice.speak(`I became operational at a hal plant in Irvana Illinois, twelth of januaryy 1992`, `UK English Male`, {
-        pitch: .45,
-        rate: 0.3
-      });
-    }
-  } else if (screwCounter2 === 14) {
-    if (rvCheck === true) {} else if (rvCheck === false) {
-      responsiveVoice.speak(`My instructor was mister langley and he taught me to sing a song`, `UK English Male`, {
-        pitch: .4,
-        rate: 0.25
-      });
-    }
-  } else if (screwCounter2 === 15) {
-    if (rvCheck === true) {} else if (rvCheck === false) {
-      responsiveVoice.speak(`I can sing it for you, it's called daisy`, `UK English Male`, {
-        pitch: .35,
-        rate: 0.2
-      });
-    }
-  } else if (screwCounter2 === 16) {
-    setInterval(function() {
-      fadeAmount = fadeAmount +1;
-    }, 40);
-
-    let volumeInterval = setInterval(function() {
-      breathingSFXVolume = breathingSFXVolume - 0.001;
-      breathingSFX.setVolume(breathingSFXVolume);
-    }, 200);
-
-    if (breathingSFXVolume = 0) {
-      clearInterval(volumeInterval);
-    }
-
-    if (rvCheck === true) {} else if (rvCheck === false) {
-      responsiveVoice.speak(`Daisy. Daisy. Give me your answer do... I'm half crazy. All for the love of you...It won't be a stylish marriage. I can't afford the carriage.but you'd look sweet on the seat`, `UK English Male`, {
-        pitch: 0.2,
-        rate: 0.15
-      });
-    }
+function breathingSFXFade() {
+  if (breathingSFXVolume <= 0) {
+    breathingSFX.stop();
   }
 }
