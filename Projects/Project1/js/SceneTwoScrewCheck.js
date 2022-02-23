@@ -3,22 +3,22 @@ class SceneTwoScrewCheck {
 
   //stores distance between tip of index and center of screws
   screwCheck2() {
-    d5 = dist(tipX, tipY, 80, 140);
-    d6 = dist(tipX, tipY, 108, 140);
-    d7 = dist(tipX, tipY, 135, 140);
-    d8 = dist(tipX, tipY, 162, 140);
-    d9 = dist(tipX, tipY, 186, 140);
-    d10 = dist(tipX, tipY, 210, 140);
-    d11 = dist(tipX, tipY, 234, 140);
-    d12 = dist(tipX, tipY, 258, 140);
-    d13 = dist(tipX, tipY, 80, 194);
-    d14 = dist(tipX, tipY, 108, 194);
-    d15 = dist(tipX, tipY, 136, 194);
-    d16 = dist(tipX, tipY, 162, 194);
-    d17 = dist(tipX, tipY, 186, 194);
-    d18 = dist(tipX, tipY, 210, 194);
-    d19 = dist(tipX, tipY, 234, 194);
-    d20 = dist(tipX, tipY, 258, 194);
+    d5 = dist(tipX, tipY, 110, 192);
+    d6 = dist(tipX, tipY, 144, 192);
+    d7 = dist(tipX, tipY, 178, 192);
+    d8 = dist(tipX, tipY, 212, 192);
+    d9 = dist(tipX, tipY, 246, 192);
+    d10 = dist(tipX, tipY, 280, 192);
+    d11 = dist(tipX, tipY, 314, 192);
+    d12 = dist(tipX, tipY, 348, 192);
+    d13 = dist(tipX, tipY, 110, 260);
+    d14 = dist(tipX, tipY, 144, 260);
+    d15 = dist(tipX, tipY, 178, 260);
+    d16 = dist(tipX, tipY, 212, 260);
+    d17 = dist(tipX, tipY, 246, 260);
+    d18 = dist(tipX, tipY, 280, 260);
+    d19 = dist(tipX, tipY, 314, 260);
+    d20 = dist(tipX, tipY, 348, 260);
 
     //if tip of finger is near screw 1 spin the screw
     //if tip of finger is still near screw 1 after 5 seconds, make coresponding memory unit red, raise the screw count and call screw count function

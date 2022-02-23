@@ -161,7 +161,7 @@ function setup() {
   userName = prompt(`Hello, what is your name?`);
 
   //declares what state the program starts with
-  state = `title`;
+  state = undefined;
 
 //sets default rate for hal's voice
   responsiveVoice.setDefaultRate(0.75);
@@ -184,6 +184,7 @@ function setup() {
     flipHorizontal: true
   }, function() {
     console.log(`Model loaded.`);
+    state = `title`;
   });
 
   //listen for predictions from ml5 handpose
@@ -196,10 +197,13 @@ tells program what to do depending on which state the program is in
 */
 function draw() {
 
+console.log(d14);
+
 //tells program what functions to run if the program is in the title state
   if (state === `title`) {
 
     titleClass.titleVisuals();
+    titleClass.titleText();
     cnv.mouseClicked(titleClass.startUnpluggingHal);
 
 //tells program what functions to run if the program is in the scene 1 state
@@ -245,7 +249,7 @@ function drawScrewdriver() {
     noFill();
     stroke(200);
     strokeWeight(10);
-    line(baseX * 2, baseY * 2, tipX * 2, tipY * 2);
+    line(baseX * 1.5, baseY * 1.5, tipX * 1.5, tipY * 1.5);
     pop();
 
     push();
@@ -253,15 +257,15 @@ function drawScrewdriver() {
     rectMode(CENTER);
     noStroke();
     fill(200);
-    rect(tipX * 2, tipY * 2, 8, 8, );
+    rect(tipX * 1.5, tipY * 1.5, 12);
     pop();
 
     push();
     //screwdriver base
     rectMode(CENTER);
     noStroke();
-    fill(140, 0, 0);
-    rect(baseX * 2, baseY * 2, 20, 90, 50);
+    fill(160);
+    rect(baseX * 1.5, baseY * 1.5, 30, 95, 10);
     pop();
   }
 }

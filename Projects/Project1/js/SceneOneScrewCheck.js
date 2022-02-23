@@ -4,13 +4,13 @@ class SceneOneScrewCheck {
   //stores distance between tip of index and center of screws
   screwCheck1() {
     //top left screw
-    d1 = dist(tipX, tipY, 30, 40);
+    d1 = dist(tipX, tipY, 30, 30);
     //bottom right screw
-    d2 = dist(tipX, tipY, 460, 297.5);
+    d2 = dist(tipX, tipY, 600, 380);
     // bottom left screw
-    d3 = dist(tipX, tipY, 30, 297.5);
+    d3 = dist(tipX, tipY, 30, 380);
     //top right screw
-    d4 = dist(tipX, tipY, 460, 40);
+    d4 = dist(tipX, tipY, 600, 30);
 
     //if tip of finger is near top left screw spin the screw
     //if tip of finger is still near top left screw after 5 seconds make the screw colour black, raise the screw count and call screw count function
