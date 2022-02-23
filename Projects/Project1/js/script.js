@@ -4,6 +4,10 @@ Daniel Little
 
 With this program the user becomes the Protagonist of Stanley Kubrick's movie, 2001: A Space Odyssey.
 The user has to disable the evil artificial intelligence system HAL 9000 by using their index finger which is turned into a screwdriver
+Holding the tip of your finger/screwdriver over a screw for 5 seconds will loosen it.
+
+breathingSFX audio came from the following youtube video (reverb and speed changes done in logic):
+https://www.youtube.com/watch?v=cb_DM4PEpPA
 */
 
 "use strict";
@@ -71,6 +75,36 @@ let memoryUnitColours = {
   memoryUnit16Colour: 255
 }
 
+//stores rotation amount for each screw in scene 1
+let sceneOneScrewRotation = {
+  screwOneRotation: 0,
+  screwTwoRotation: 0,
+  screwThreeRotation: 0,
+  screwFourRotation: 0
+}
+
+//stores rotation amount for each screw in scene 2
+let sceneTwoScrewRotation = {
+  screwOneRotation: 0,
+  screwTwoRotation: 0,
+  screwThreeRotation: 0,
+  screwFourRotation: 0,
+  screwFiveRotation: 0,
+  screwSixRotation: 0,
+  screwSevenRotation: 0,
+  screwEightRotation: 0,
+  screwNineRotation: 0,
+  screwTenRotation: 0,
+  screwElevenRotation: 0,
+  screwTwelveRotation: 0,
+  screwThirteenRotation: 0,
+  screwFourteenRotation: 0,
+  screwFifteenRotation: 0,
+  screwSixteenRotation: 0,
+  screwSeventeenRotation: 0,
+  screwEighteenRotation: 0
+}
+
 //stores locations of various parts of the hand picked up by the camera using ml5
 let hand;
 let index;
@@ -87,7 +121,7 @@ let d2 = undefined;
 let d3 = undefined;
 let d4 = undefined;
 
-//stores distances from fingers to each of the screws in scene 1
+//stores distances from fingers to each of the screws in scene 2
 let d5 = undefined;
 let d6 = undefined;
 let d7 = undefined;
@@ -112,14 +146,13 @@ let rvCheck = responsiveVoice.isPlaying();
 let cnv;
 
 /**
-Description of preload
+loads the breathing sound effects
 */
 function preload() {
   breathingSFX = loadSound(`assets/sounds/breathingSFX.mp3`);
 }
 
 /**
-Description of setup
 */
 function setup() {
   cnv = createCanvas(950, 600);
@@ -159,7 +192,7 @@ function setup() {
   });
 }
 /**
-Description of draw()
+tells program what to do depending on which state the program is in
 */
 function draw() {
 
@@ -230,6 +263,7 @@ function drawScrewdriver() {
   }
 }
 
+//function to fade out the breathing sound effects at the end of the program
 function breathingSFXFade() {
   if (breathingSFXVolume <= 0) {
     breathingSFX.stop();

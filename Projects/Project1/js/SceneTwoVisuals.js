@@ -183,7 +183,6 @@ class SceneTwoVisuals {
   }
 
   drawHal() {
-
     //main rectangle
     push();
     rectMode(CENTER);
@@ -234,11 +233,29 @@ class SceneTwoVisuals {
     ellipse(170, 286.25, 15, );
     pop();
 
+    //memory unit 1 screw lines
+    push();
+    strokeWeight(1.5);
+    translate(170, 286.25);
+    rotate(sceneTwoScrewRotation.screwOneRotation);
+    line(0, 10, 0, -10);
+    line(10, 0, -10, 0);
+    pop();
+
     //memory unit 2 screw
     push();
     noStroke();
     fill(150, 150, 150);
     ellipse(220, 286.25, 15, );
+    pop();
+
+    //memory unit 2 screw lines
+    push();
+    strokeWeight(1.5);
+    translate(220, 286.25);
+    rotate(sceneTwoScrewRotation.screwTwoRotation);
+    line(0, 10, 0, -10);
+    line(10, 0, -10, 0);
     pop();
 
     //memory unit 3 screw
@@ -248,11 +265,29 @@ class SceneTwoVisuals {
     ellipse(270, 286.25, 15, );
     pop();
 
+    //memory unit 3 screw lines
+    push();
+    strokeWeight(1.5);
+    translate(270, 286.25);
+    rotate(sceneTwoScrewRotation.screwThreeRotation);
+    line(0, 10, 0, -10);
+    line(10, 0, -10, 0);
+    pop();
+
     //memory unit 4 screw
     push();
     noStroke();
     fill(150, 150, 150);
     ellipse(320, 286.25, 15, );
+    pop();
+
+    //memory unit 4 screw lines
+    push();
+    strokeWeight(1.5);
+    translate(320, 286.25);
+    rotate(sceneTwoScrewRotation.screwFourRotation);
+    line(0, 10, 0, -10);
+    line(10, 0, -10, 0);
     pop();
 
     //memory unit 5 screw
@@ -262,11 +297,29 @@ class SceneTwoVisuals {
     ellipse(370, 286.25, 15, );
     pop();
 
+    //memory unit 5 screw lines
+    push();
+    strokeWeight(1.5);
+    translate(370, 286.25);
+    rotate(sceneTwoScrewRotation.screwFiveRotation);
+    line(0, 10, 0, -10);
+    line(10, 0, -10, 0);
+    pop();
+
     //memory unit 6 screw
     push();
     noStroke();
     fill(150, 150, 150);
     ellipse(420, 286.25, 15, );
+    pop();
+
+    //memory unit 6 screw lines
+    push();
+    strokeWeight(1.5);
+    translate(420, 286.25);
+    rotate(sceneTwoScrewRotation.screwSixRotation);
+    line(0, 10, 0, -10);
+    line(10, 0, -10, 0);
     pop();
 
     //memory unit 7 screw
@@ -276,11 +329,29 @@ class SceneTwoVisuals {
     ellipse(470, 286.25, 15, );
     pop();
 
+    //memory unit 8 screw lines
+    push();
+    strokeWeight(1.5);
+    translate(470, 286.25);
+    rotate(sceneTwoScrewRotation.screwSevenRotation);
+    line(0, 10, 0, -10);
+    line(10, 0, -10, 0);
+    pop();
+
     //memory unit 8 screw
     push();
     noStroke();
     fill(150, 150, 150);
     ellipse(520, 286.25, 15, );
+    pop();
+
+    //memory unit 2 screw lines
+    push();
+    strokeWeight(1.5);
+    translate(520, 286.25);
+    rotate(sceneTwoScrewRotation.screwEightRotation);
+    line(0, 10, 0, -10);
+    line(10, 0, -10, 0);
     pop();
 
     //memory unit 9 screw
@@ -290,11 +361,29 @@ class SceneTwoVisuals {
     ellipse(170, 388.75, 15);
     pop();
 
+    //memory unit 9 screw lines
+    push();
+    strokeWeight(1.5);
+    translate(170, 388.75);
+    rotate(sceneTwoScrewRotation.screwNineRotation);
+    line(0, 10, 0, -10);
+    line(10, 0, -10, 0);
+    pop();
+
     //memory unit 10 screw
     push();
     noStroke();
     fill(150, 150, 150);
     ellipse(220, 388.75, 15);
+    pop();
+
+    //memory unit 10 screw lines
+    push();
+    strokeWeight(1.5);
+    translate(220, 388.75);
+    rotate(sceneTwoScrewRotation.screwTenRotation);
+    line(0, 10, 0, -10);
+    line(10, 0, -10, 0);
     pop();
 
     //memory unit 11 screw
@@ -304,11 +393,29 @@ class SceneTwoVisuals {
     ellipse(270, 388.75, 15);
     pop();
 
+    //memory unit 11 screw lines
+    push();
+    strokeWeight(1.5);
+    translate(270, 388.75);
+    rotate(sceneTwoScrewRotation.screwElevenRotation);
+    line(0, 10, 0, -10);
+    line(10, 0, -10, 0);
+    pop();
+
     //memory unit 12 screw
     push();
     noStroke();
     fill(150, 150, 150);
     ellipse(320, 388.75, 15);
+    pop();
+
+    //memory unit 12 screw lines
+    push();
+    strokeWeight(1.5);
+    translate(320, 388.75);
+    rotate(sceneTwoScrewRotation.screwTwelveRotation);
+    line(0, 10, 0, -10);
+    line(10, 0, -10, 0);
     pop();
 
     //memory unit 13 screw
@@ -318,11 +425,29 @@ class SceneTwoVisuals {
     ellipse(370, 388.75, 15);
     pop();
 
+    //memory unit 13 screw lines
+    push();
+    strokeWeight(1.5);
+    translate(370, 388.75);
+    rotate(sceneTwoScrewRotation.screwThirteenRotation);
+    line(0, 10, 0, -10);
+    line(10, 0, -10, 0);
+    pop();
+
     //memory unit 14 screw
     push();
     noStroke();
     fill(150, 150, 150);
     ellipse(420, 388.75, 15);
+    pop();
+
+    //memory unit 14 screw lines
+    push();
+    strokeWeight(1.5);
+    translate(420, 388.75);
+    rotate(sceneTwoScrewRotation.screwFourteenRotation);
+    line(0, 10, 0, -10);
+    line(10, 0, -10, 0);
     pop();
 
     //memory unit 15 screw
@@ -332,11 +457,29 @@ class SceneTwoVisuals {
     ellipse(470, 388.75, 15);
     pop();
 
+    //memory unit 15 screw lines
+    push();
+    strokeWeight(1.5);
+    translate(470, 388.75);
+    rotate(sceneTwoScrewRotation.screwFifteenRotation);
+    line(0, 10, 0, -10);
+    line(10, 0, -10, 0);
+    pop();
+
     //memory unit 16 screw
     push();
     noStroke();
     fill(150, 150, 150);
     ellipse(520, 388.75, 15);
+    pop();
+
+    //memory unit 2 screw lines
+    push();
+    strokeWeight(1.5);
+    translate(520, 388.75);
+    rotate(sceneTwoScrewRotation.screwSixteenRotation);
+    line(0, 10, 0, -10);
+    line(10, 0, -10, 0);
     pop();
   }
 

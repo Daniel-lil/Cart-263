@@ -10,7 +10,7 @@ class SceneOneVisuals {
     rect(width / 2, height / 1.5, 702, 250);
     pop();
 
-// red rectangle that is filled in
+    // red rectangle that is filled in
     push();
     rectMode(CENTER);
     fill(200, 0, 0);
@@ -18,7 +18,7 @@ class SceneOneVisuals {
     rect(519, height / 1.5, 157.5, 236);
     pop();
 
-//red rectanglle outinle - farthest to the left
+    //red rectangle outinle - farthest to the left
     push();
     rectMode(CENTER);
     noFill();
@@ -26,7 +26,7 @@ class SceneOneVisuals {
     rect(241.5, height / 1.6, 225, 83);
     pop();
 
-//red rectanngle outline - with hal logo inside
+    //red rectanngle outline - with hal logo inside
     push();
     rectMode(CENTER);
     noFill();
@@ -42,7 +42,7 @@ class SceneOneVisuals {
     rect(519, height / 1.6, 150, 83);
     pop();
 
-//red rectangle outline - farthest to the right
+    //red rectangle outline - farthest to the right
     push();
     rectMode(CENTER);
     noFill();
@@ -52,7 +52,6 @@ class SceneOneVisuals {
   }
 
   drawHal() {
-
     //main rectangle
     push();
     rectMode(CENTER);
@@ -92,10 +91,12 @@ class SceneOneVisuals {
     noStroke();
     ellipse(width / 2, height / 4, 12.5);
     pop();
-  }
-  drawScrews() {
 
-    //bottom right screw
+    //logo text
+  }
+
+  drawScrews() {
+    //bottom right screw circle
     push();
     fill(screwColours.screwColour1);
     strokeWeight(1);
@@ -103,7 +104,16 @@ class SceneOneVisuals {
     ellipse(width - 40, height - 40, 45);
     pop();
 
-    //top left screw
+    //bottom right screw lines
+    push();
+    translate(width - 40, height - 40);
+    strokeWeight(1.5);
+    rotate(sceneOneScrewRotation.screwTwoRotation);
+    line(0, -15, 0, +15);
+    line(+15, 0, -15, 0);
+    pop();
+
+    //top left screw circle
     push();
     fill(screwColours.screwColour2);
     strokeWeight(1);
@@ -111,7 +121,16 @@ class SceneOneVisuals {
     ellipse(40, 40, 45);
     pop();
 
-    //top right screw
+    //top left screw lines
+    push();
+    strokeWeight(1.5);
+    translate(40, 40);
+    rotate(sceneOneScrewRotation.screwOneRotation);
+    line(0, 15, 0, -15);
+    line(-15, 0, 15, 0);
+    pop();
+
+    //top right screw circle
     push();
     fill(screwColours.screwColour3);
     strokeWeight(1);
@@ -119,12 +138,31 @@ class SceneOneVisuals {
     ellipse(width - 40, 40, 45);
     pop();
 
-    //bottom left screw
+    //top right screw lines
+    push();
+    strokeWeight(1.5);
+    translate(width - 40, 40);
+    rotate(sceneOneScrewRotation.screwFourRotation);
+    line(0, 15, 0, -15);
+    line(15, 0, -15, 0);
+    pop();
+
+    //bottom left screw circle
     push();
     fill(screwColours.screwColour4);
     strokeWeight(1);
     stroke(0);
     ellipse(40, height - 40, 45);
     pop();
+
+    //bottom left screw lines
+    push();
+    strokeWeight(1.5);
+    translate(40, height - 40);
+    rotate(sceneOneScrewRotation.screwThreeRotation);
+    line(0, -15, 0, 15);
+    line(-15, 0, 15, 0);
+    pop();
   }
+
 }
