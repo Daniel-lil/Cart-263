@@ -153,7 +153,7 @@ function preload() {
 }
 
 /**
-*/
+ */
 function setup() {
   cnv = createCanvas(950, 600);
 
@@ -163,10 +163,10 @@ function setup() {
   //declares what state the program starts with
   state = undefined;
 
-//sets default rate for hal's voice
+  //sets default rate for hal's voice
   responsiveVoice.setDefaultRate(0.75);
 
-//stores data from each class in a variable with a matching name
+  //stores data from each class in a variable with a matching name
   titleClass = new Title();
   sceneOneVisuals = new SceneOneVisuals();
   sceneOneAudio = new SceneOneAudio();
@@ -197,16 +197,16 @@ tells program what to do depending on which state the program is in
 */
 function draw() {
 
-console.log(d14);
+  console.log(d14);
 
-//tells program what functions to run if the program is in the title state
+  //tells program what functions to run if the program is in the title state
   if (state === `title`) {
 
     titleClass.titleVisuals();
     titleClass.titleText();
     cnv.mouseClicked(titleClass.startUnpluggingHal);
 
-//tells program what functions to run if the program is in the scene 1 state
+    //tells program what functions to run if the program is in the scene 1 state
   } else if (state === `sceneOne`) {
 
     background(240);
@@ -218,7 +218,7 @@ console.log(d14);
     drawScrewdriver();
     sceneOneScrewCheck.screwCheck1();
 
-//tells program what functions to run if the program is in the scene 2 state
+    //tells program what functions to run if the program is in the scene 2 state
   } else if (state === `sceneTwo`) {
 
     background(0);
