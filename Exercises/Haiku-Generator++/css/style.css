@@ -11,17 +11,15 @@ Also hides overflow.
 
 
 body {
-  background-color: #32e0e3;
-  font-size: 2.5rem;
-  font-style: oblique;
-  text-align: center;
-  padding-top: 75px;
+  background-color: #32e0e3;/* sets starting font background colour */
+  font-size: 2.5rem;/* sets font size */
+  font-style: oblique; /* sets font */
+  text-align: center; /* centres text */
+  padding-top: 50px; /* adds space at top of screen */
   overflow: hidden; /* Hide anything that goes off the window size */
   }
 
+/* adds space between colour pickers and readText button */
   footer {
-    padding-top: 25px;
-  }
-
-  #Haiku{
+    padding-top: 40px;
   }

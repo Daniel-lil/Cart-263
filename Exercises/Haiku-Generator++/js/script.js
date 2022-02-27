@@ -44,27 +44,27 @@ let line1 = random(fiveSyllableLines);
 let line2 = random(sevenSyllableLines);
 let line3 = random(fiveSyllableLines);
 
-//declaring variables for different parts of the text to be interacted with
+//declaring variables for different lines of text to put into css
 let titleP = document.getElementById(`title`)
 let line1P = document.getElementById(`line-1`)
 let line2P = document.getElementById(`line-2`)
 let line3P = document.getElementById(`line-3`)
 let button = document.getElementById(`readTextButton`);
 
-//
+//setting lines of text different parts of css inner text
 titleP.innerText = title;
 line1P.innerText = line1;
 line2P.innerText = line2;
 line3P.innerText = line3;
 
+//telling program to run lineClicked function when each line is clicked
 titleP.addEventListener(`click`, lineClicked);
 line1P.addEventListener(`click`, lineClicked);
 line2P.addEventListener(`click`, lineClicked);
 line3P.addEventListener(`click`, lineClicked);
-
 button.addEventListener(`click`, readText);
 
-
+//setting text colour picker to change text colour in css
   let textColourPicker = document.getElementById(`textColourPicker`);
   textColourPicker.addEventListener(`change`, function(){
     let textColour = textColourPicker.value;
@@ -72,6 +72,7 @@ button.addEventListener(`click`, readText);
     console.log(textColour);
   });
 
+//setting background colour picker to change background colour in css
   let backgroundColourPicker = document.getElementById(`backgroundColourPicker`);
   backgroundColourPicker.addEventListener(`change`, function(){
     let backgroundColour = backgroundColourPicker.value;
@@ -79,10 +80,12 @@ button.addEventListener(`click`, readText);
     console.log(backgroundColour);
   });
 
+//when a line is clicked trigger the fadeOut function
 function lineClicked(event) {
   fadeOut(event.target, 1);
 }
 
+//fades out the line that is clicked on, called the setNewLine function to change the line and then fades back in
 function fadeOut(element, opacity) {
   opacity -= 0.015
   element.style[`opacity`] = opacity;
@@ -96,7 +99,7 @@ function fadeOut(element, opacity) {
     fadeIn(element, opacity);
   }
 }
-
+//fadeIn function for text (called at end of fadeOut when line is clicked on)
 function fadeIn(element, opacity) {
   opacity += 0.015
   element.style[`opacity`] = opacity;
@@ -107,7 +110,7 @@ function fadeIn(element, opacity) {
   }
 }
 
-
+//function that resets a line of text (called at end of fadeOut when line is clicked on)
 function setNewLine(element) {
   if (element === line1P) {
     element.innerText = random(fiveSyllableLines);
@@ -118,6 +121,7 @@ function setNewLine(element) {
   }
 }
 
+//reads the haiku when readText button is clicked on
 function readText(element){
   responsiveVoice.speak(`${line1P.innerText}, ${line2P.innerText}, ${line3P.innerText}`, `US English Male`, {
     pitch:.7,
@@ -125,6 +129,7 @@ function readText(element){
   });
 };
 
+//calls random number from between 0 and the array length
 function random(array){
   let index = Math.floor(Math.random() * array.length);
   return array[index];
