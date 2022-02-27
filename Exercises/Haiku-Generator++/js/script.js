@@ -110,7 +110,7 @@ function fadeIn(element, opacity) {
   }
 }
 
-//function that resets a line of text (called at end of fadeOut when line is clicked on)
+//function that switches out a line of text for another new line(called at end of fadeOut when line is clicked on)
 function setNewLine(element) {
   if (element === line1P) {
     element.innerText = random(fiveSyllableLines);
@@ -118,7 +118,8 @@ function setNewLine(element) {
     element.innerText = random(fiveSyllableLines);
   } else if (element === line2P) {
     element.innerText = random(sevenSyllableLines);
-  }
+  } else if (element === titleP) {
+    element.innerText = random(titles);
 }
 
 //reads the haiku when readText button is clicked on
