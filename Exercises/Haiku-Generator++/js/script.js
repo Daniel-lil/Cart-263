@@ -121,6 +121,7 @@ function setNewLine(element) {
   } else if (element === titleP) {
     element.innerText = random(titles);
 }
+}
 
 //reads the haiku when readText button is clicked on
 function readText(element){
