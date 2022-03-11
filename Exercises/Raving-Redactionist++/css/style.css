@@ -1,10 +1,8 @@
 /*********************************************
 
-Here is a description of any special CSS used.
-By default that's nothing.
+
 
 **********************************************/
-
 #secret-document {
   font-family: monospace;
   font-size: 1.2rem;
@@ -12,12 +10,30 @@ By default that's nothing.
   margin: auto;
 }
 
+/* blacks out text, makes it so user cannot select text */
 .redacted {
   background-color: black;
   user-select: none;
 }
 
+/* turns text red and gives it an underline */
 .revealed {
   color: red;
   text-decoration: underline;
+}
+
+#counter {
+  font-family: monospace;
+  font-size: 1.2rem;
+  width: 70vw;
+  margin: auto;
+}
+
+#alert {
+  font-family: monospace;
+  font-weight: 600;
+  color: #ff0000;
+  font-size: 1.7rem;
+  width: 70vw;
+  margin: auto;
 }
