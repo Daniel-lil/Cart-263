@@ -18,18 +18,15 @@
 
 <body>
 
-  <div id="riddle" title="Riddle me this Batman">
-    <h3>
-What is always on its way here, but never arrives?
-</h3>
-    <h5>
-(Find the necessary letters by scrolling over the letters with your mouse, and solve the riddle by dragging the right letters into the box in order.)
-</h6>
-</div>
 
-  <!-- The poem, secret letters are in spans with class "secret" -->
+  <h1>
+    What is always on its way here,
+    but never arrives?
+  </h1>
+
+  <!-- The text, secret letters are in spans with class "secret" -->
   <section id="poem">
-    <h2>Can you hear me, Ba<span class="secret">t</span>man?</h2>
+    <p>Can you hear me, Ba<span class="secret">t</span>man?</p>
     <p>
       I know you can.<br />
       <span class="secret">O</span>f course, it is I, Edward Nigma,<br />
@@ -50,9 +47,16 @@ What is always on its way here, but never arrives?
   <!-- The secret answer area-->
   <section id="answer"></section>
 
-  <div id="solved-dialog" title="Da Vinci?!">
+  <h6>
+    <P>
+      Find the necessary letters to solve the riddle by scrolling over the previous text with your mouse.
+    </p>
+    Drag the letters you've found onto the box in the correct order to solve the riddle.
+  </h6>
+
+  <div id="solved-dialog" title="Message from Riddler">
     <p>
-      You are soooooo smart!
+      You may have solved this puzzle Bats, but this won't be the last of me!
     </p>
   </div>
 

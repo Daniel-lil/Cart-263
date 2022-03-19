@@ -29,10 +29,11 @@ $(`#answer`).droppable({
     let letter = ui.draggable.text();
     $(this).append(letter);
     ui.draggable.draggable(`disable`);
-    ui.draggable.remove(`found`);
+    ui.draggable.removeClass(`found`, 500);
+    ui.draggable.off(`mouseover`);
     //checks if answer is corrects
-    if ($(this).text() === `theremin`) {
-      $(`solved-dialog`).dialog(`open`);
+    if ($(this).text() === `Theremin`) {
+      $(`#solved-dialog`).dialog(`open`);
     }
   }
 });
