@@ -31,7 +31,7 @@ $(`#answer`).droppable({
     ui.draggable.draggable(`disable`);
     ui.draggable.remove(`found`);
     //checks if answer is corrects
-    if ($(this).text() === `theremin`) {
+    if ($(this).text() === `tomORrow` || $(this).text() === `tOmoRrow` || $(this).text() === `tomoRrOw` || $(this).text() === `tomOrRow` || $(this).text() === `tOmorRow` || $(this).text() === `tomorROw`) {
       $(`solved-dialog`).dialog(`open`);
     }
   }

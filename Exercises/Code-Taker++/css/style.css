@@ -2,17 +2,24 @@
 
 
 **********************************************/
+body{
+  background-color: black;
+  font-family: "Courier New";
+  color: green;
+}
+
 #poem {
   font-size: 1.2rem;
+  color: green;
 }
 
 #answer {
   width: 10rem;
   height: 2rem;
-  border: 1px dashed black;
+  border: 1px dashed green;
 }
 
 .found {
-  color: red;
+  text-decoration: underline;
 
 }
