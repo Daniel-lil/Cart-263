@@ -26,7 +26,7 @@ class Play extends Phaser.Scene {
 
     Phaser.Actions.RandomRectangle(this.happiness.getChildren(), this.physics.world.bounds);
 
-    this.physics.add.overlap(this.avatar, this.sadness, this.getSad, null, this);
+    this.physics.add.overlap(this.avatar, this.happiness, this.getHappy, null, this);
         this.physics.add.collider(this.avatar, this.happiness);
               this.physics.add.collider(this.happiness, this.happiness);
   this.physics.add.collider(this.sadness, this.happiness);
@@ -34,10 +34,10 @@ class Play extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
   }
 
-  getSad(avatar, sadness) {
+  getHappy(avatar, happiness) {
     let x = Math.random() * this.sys.canvas.width;
     let y = Math.random() * this.sys.canvas.height;
-    this.sadness.setPosition(x, y);
+    this.happiness.setPosition(x, y);
   }
 
   update() {

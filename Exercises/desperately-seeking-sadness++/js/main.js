@@ -1,5 +1,5 @@
 /**
-Desperately Seeking Sadness
+Desperately Seeking happiness
 Daniel Little
 
 This is a template. You must fill in the title,
