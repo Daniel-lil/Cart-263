@@ -6,6 +6,7 @@ class Play extends Phaser.Scene {
   }
 
   create() {
+
     //create the avatar
     this.avatar = this.physics.add.sprite(400, 300, `avatar`);
     this.avatar.setCollideWorldBounds(true);
@@ -28,20 +29,31 @@ class Play extends Phaser.Scene {
     Phaser.Actions.RandomRectangle(this.sadness.getChildren(), this.physics.world.bounds);
 
     this.physics.add.overlap(this.avatar, this.happiness, this.getHappy, null, this);
-        this.physics.add.collider(this.avatar, this.sadness);
+        this.physics.add.collider(this.avatar, this.sadness, this.triggerCollideSound, null, this);
               this.physics.add.collider(this.sadness, this.sadness);
   this.physics.add.collider(this.happiness, this.sadness);
 
     this.cursors = this.input.keyboard.createCursorKeys();
   }
 
+  triggerCollideSound() {
+    let collide_sfx = this.sound.add(`collide-sfx`, {volume: 0.005});
+    collide_sfx.stop();
+      collide_sfx.play();
+  }
+
   getHappy(avatar, happiness) {
     let x = Math.random() * this.sys.canvas.width;
     let y = Math.random() * this.sys.canvas.height;
     this.happiness.setPosition(x, y);
+
+    let collect_sfx = this.sound.add(`collect-sfx`, {volume: 0.1});
+collect_sfx.play();
+
   }
 
   update() {
+
     if (this.cursors.left.isDown) {
       this.avatar.setAngularVelocity(-150);
     } else if (this.cursors.right.isDown) {
@@ -57,7 +69,6 @@ class Play extends Phaser.Scene {
     } else {
       this.avatar.setAcceleration(0);
     }
-
 
   }
 }
