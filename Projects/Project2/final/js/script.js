@@ -160,7 +160,7 @@ function displayStars() {
   //stores amplitude data from different frequencies of song in variables
   guitarLevel = guitarAmp.getLevel();
   //maps amplitude of low frequencies to different scale and stores it in speed variable
-  starSpeed = map(guitarLevel, 0, 1, 0.2, 25);
+  starSpeed = map(guitarLevel, 0, 1, 0.2, 100);
   //translate(width / 2, height / 2);
 
   if (!bass.isPlaying()){
