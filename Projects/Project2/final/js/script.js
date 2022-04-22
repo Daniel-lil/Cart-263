@@ -1,9 +1,8 @@
 /**
-Progress Report Cart 253 Final
+Cart 263 Project 2
 Daniel Little
 
-This is a progress report for my 2nd project for CART-263
-it is the start of a program which will draw a scene and
+a program which will draw a scene and
 animate that scene to go along with a song
 
 The song is started by clicking on the canvas
@@ -11,18 +10,20 @@ The song is started by clicking on the canvas
 
 "use strict";
 
+//setting variables for the wavelike terrain's general shape
 let cols, rows;
 let scl = 35;
 let w = 2800;
 let h = 1000;
-
+//setting speed at which the waves in the terrain move at
 let waveSpeed = 0;
-
+//creating a variable for the spikes caused in the terrain due to amplitude changes
+let terrainSpike;
+//creating an array to store coordinates for points of the terrain
 let terrain = [];
 
+//creating a variable to use to change the background colour
 let backgroundColour;
-
-let terrainSpike;
 
 //creating an array to store the stars
 let stars = [];
@@ -31,7 +32,7 @@ let starSpeed;
 //creating variables for various parts of the song
 let bass, guitar, drums, vox;
 
-//creating variables to use for the song's amplitude analysis
+//creating variables to use for the various part of the song's amplitude analysis
 let guitarAmp, guitarLevel;
 let bassAmp, bassLevel;
 let voxAmp, voxLevel;
@@ -39,6 +40,7 @@ let drumsAmp, drumsLevel;
 
 /**
 Loads music from assets and stores it in song variable
+loads each instrument seperatley so they may affect different parts of the visuals
 */
 function preload() {
   bass = loadSound(`assets/sounds/Bass.mp3`);
@@ -48,47 +50,44 @@ function preload() {
 }
 
 function setup() {
-
   //creates a canvas and toggles song if canvas is clicked
   let cnv = createCanvas(windowWidth, windowHeight, WEBGL);
   cnv.mouseClicked(playOrPauseSong);
 
+  //setting the variables to be used for each amplitude calculations
   guitarAmp = new p5.Amplitude();
   bassAmp = new p5.Amplitude();
   voxAmp = new p5.Amplitude();
   drumsAmp = new p5.Amplitude();
 
+  //using scale, width and height dimensions to calculate the length of # of rows +columns
   cols = w / scl;
   rows = h / scl;
-
+//using for loops to fill the array for terrain coordinates
   for (let x = 0; x < cols; x++) {
-  terrain[x] = [];
-  for (let y = 0; y < rows; y++) {
-    terrain[x][y] = 0; //specify a default value for now
+    terrain[x] = [];
+    for (let y = 0; y < rows; y++) {
+      terrain[x][y] = 0; //specify a default value for now
+    }
   }
-}
 
-  //changes anglemoode from degrees to radians
+  // switches from degrees to radians
   angleMode(DEGREES);
-  //creates 500 stars and stores them in array
+  //creates stars and stores them in array
   for (let i = 0; i < 1000; i++) {
     stars[i] = new Star();
   }
 }
 
-//calls functions to display the stars and the tree
+//calls functions to display the stars, the tree, the wavelike terrain and the background
 function draw() {
   displayBackground();
-
   displayStars();
-
   displayTerrain();
-
   branch(100);
-
 }
 
-//pauses + plays song + sets fft input to the song
+//pauses + plays each part of the song
 function playOrPauseSong() {
   if (bass.isPlaying() && guitar.isPlaying() && drums.isPlaying() && vox.isPlaying()) {
     bass.pause();
@@ -100,6 +99,7 @@ function playOrPauseSong() {
     guitar.loop();
     drums.loop();
     vox.loop();
+//  sets corresponding amplitude input to the each part song
     voxAmp = new p5.Amplitude;
     voxAmp.setInput(vox);
     drumsAmp = new p5.Amplitude;
@@ -111,44 +111,48 @@ function playOrPauseSong() {
   }
 }
 
-function displayBackground(){
-voxLevel = voxAmp.getLevel();
-backgroundColour = map(voxLevel, 0, 1, 0, 255);
-background(backgroundColour, backgroundColour/150, backgroundColour);
+//changes background colour based on vocal amplitude
+function displayBackground() {
+  voxLevel = voxAmp.getLevel();
+  backgroundColour = map(voxLevel, 0, 1, 0, 255);
+  background(backgroundColour, backgroundColour / 150, backgroundColour);
 }
 
+//displays and updates wavelike terrain
 function displayTerrain() {
   push();
+  //creates spikes in terrain based on drum amplitude multipled by perlin noise
+  //so that there's always a little bit of smooth waves
   drumsLevel = drumsAmp.getLevel();
   terrainSpike = map(drumsLevel, 0, 1, 0, 8);
-
   waveSpeed -= 0.06;
-let yoff = waveSpeed;
-for (let y = 0; y < rows; y++) {
-  let xoff = 0;
-  for (let x = 0; x < cols; x++) {
-    terrain[x][y] = map(noise(xoff, yoff), 0, 1, -100 * terrainSpike, 100 * terrainSpike);
-    xoff += 0.2;
+  let yoff = waveSpeed;
+  for (let y = 0; y < rows; y++) {
+    let xoff = 0;
+    for (let x = 0; x < cols; x++) {
+      terrain[x][y] = map(noise(xoff, yoff), 0, 1, -10 * terrainSpike, 10 * terrainSpike);
+      xoff += 0.2;
+    }
+    yoff += 0.2;
   }
-  yoff += 0.2;
-}
 
-translate(0, 75);
-rotateX(65);
-fill(39, 89, 105);
-stroke(23, 62, 75);
-translate(-w / 2, -h / 2);
-for (let y = 0; y < rows - 1; y++) {
-
-
-  beginShape(TRIANGLE_STRIP);
-  for (let x = 0; x < cols; x++) {
-    vertex(x * scl, y * scl, terrain[x][y]);
-    vertex(x * scl, (y + 1) * scl, terrain[x][y + 1]);
+  //fixes positioning and rotation of terrain
+  translate(0, 75);
+  rotateX(65);
+  //sets terrain colour to look more like water
+  fill(39, 89, 105);
+  stroke(23, 62, 75);
+  translate(-w / 2, -h / 2);
+  for (let y = 0; y < rows - 1; y++) {
+//actually draws the terrain by using a triangle strip
+    beginShape(TRIANGLE_STRIP);
+    for (let x = 0; x < cols; x++) {
+      vertex(x * scl, y * scl, terrain[x][y]);
+      vertex(x * scl, (y + 1) * scl, terrain[x][y + 1]);
+    }
+    endShape();
   }
-  endShape();
-}
-pop();
+  pop();
 }
 
 function displayStars() {
@@ -165,9 +169,10 @@ function displayStars() {
   pop();
 }
 
+//function to create the tree
 function branch(len) {
   push();
-translate(0,0,-5);
+  translate(0, 0, -5);
   //creates branches
   if (len > 10) {
     strokeWeight(map(len, 10, 100, 1, 15));
@@ -185,7 +190,6 @@ translate(0,0,-5);
     let b = 40 + random(-20, 20);
     fill(r, g, b, 220);
     noStroke();
-
     //creates leaf shape
     beginShape();
     for (let i = 45; i < 135; i++) {
@@ -193,7 +197,6 @@ translate(0,0,-5);
       let y = 13 * sin(i);
       vertex(x, y);
     }
-
     for (let i = 135; i > 45; i--) {
       let x = 13 * cos(i);
       let y = 13 * sin(-i) + 20;
