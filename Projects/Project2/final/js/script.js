@@ -12,36 +12,31 @@ The song is started by clicking on the canvas
 "use strict";
 
 let cols, rows;
-let scl = 20;
-let w = 1600;
+let scl = 35;
+let w = 2800;
 let h = 1000;
 
-let flying = 0;
+let waveSpeed = 0;
 
 let terrain = [];
 
 //creating an array to store the stars
 let stars = [];
 //creating a letiable to store the star's speed
-let speed;
-//creating for the song (currently just a placeholder)
-let song;
-let bass;
-let guitar;
-let drums;
-let vox;
+let starSpeed;
+//creating variables for various parts of the song
+let bass, guitar, drums, vox;
 
-//creating variables to use for the song's fft analysis
-let fft;
-let levels;
-let ampLow;
-let ampHigh;
+//creating variables to use for the song's amplitude analysis
+let guitarAmp, guitarLevel;
+let bassAmp, bassLevel;
+let voxAmp, voxLevel;
+let drumsAmp, drumsLevel;
 
 /**
 Loads music from assets and stores it in song variable
 */
 function preload() {
-  song = loadSound(`assets/sounds/song.mp3`);
   bass = loadSound(`assets/sounds/Bass.mp3`);
   guitar = loadSound(`assets/sounds/Guitar.mp3`);
   drums = loadSound(`assets/sounds/Drums.mp3`);
@@ -54,10 +49,15 @@ function setup() {
   let cnv = createCanvas(windowWidth, windowHeight, WEBGL);
   cnv.mouseClicked(playOrPauseSong);
 
-  cols = w / scl;
-rows = h / scl;
+  guitarAmp = new p5.Amplitude();
+  bassAmp = new p5.Amplitude();
+  voxAmp = new p5.Amplitude();
+  drumsAmp = new p5.Amplitude();
 
-for (let x = 0; x < cols; x++) {
+  cols = w / scl;
+  rows = h / scl;
+
+  for (let x = 0; x < cols; x++) {
   terrain[x] = [];
   for (let y = 0; y < rows; y++) {
     terrain[x][y] = 0; //specify a default value for now
@@ -66,8 +66,6 @@ for (let x = 0; x < cols; x++) {
 
   //changes anglemoode from degrees to radians
   angleMode(DEGREES);
-  //storing fft in fft variable
-  fft = new p5.FFT(.9);
   //creates 500 stars and stores them in array
   for (let i = 0; i < 1000; i++) {
     stars[i] = new Star();
@@ -76,17 +74,14 @@ for (let x = 0; x < cols; x++) {
 
 //calls functions to display the stars and the tree
 function draw() {
-    background(0);
-  push();
+  displayBackground();
+
   displayStars();
-  pop();
-  push();
+
   displayTerrain();
-  pop();
-  push();
-  translate(0, height /15);
+
   branch(100);
-  pop();
+
 }
 
 //pauses + plays song + sets fft input to the song
@@ -101,14 +96,21 @@ function playOrPauseSong() {
     guitar.loop();
     drums.loop();
     vox.loop();
-    fft = new p5.FFT(.9);
-    fft.setInput(song);
+    guitarAmp = new p5.Amplitude;
+    guitarAmp.setInput(guitar);
   }
 }
 
+displayBackground(){
+
+
+background(backgroundColour);
+}
+
 function displayTerrain() {
-  flying -= 0.06;
-let yoff = flying;
+  push();
+  waveSpeed -= 0.06;
+let yoff = waveSpeed;
 for (let y = 0; y < rows; y++) {
   let xoff = 0;
   for (let x = 0; x < cols; x++) {
@@ -133,20 +135,21 @@ for (let y = 0; y < rows - 1; y++) {
   }
   endShape();
 }
+pop();
 }
 
 function displayStars() {
+  push();
   //stores amplitude data from different frequencies of song in variables
-  levels = fft.analyze();
-  ampLow = fft.getEnergy(100, 350);
-  ampHigh = fft.getEnergy(700, 3000);
+  guitarLevel = guitarAmp.getLevel();
   //maps amplitude of low frequencies to different scale and stores it in speed variable
-  speed = map(ampLow, -40, 300, .2, 10);
+  starSpeed = map(guitarLevel, 0, 1, .2, 40);
   //translate(width / 2, height / 2);
   for (let i = 0; i < stars.length; i++) {
     stars[i].updateStar();
     stars[i].showStar();
   }
+  pop();
 }
 
 function branch(len) {
