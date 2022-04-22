@@ -20,6 +20,10 @@ let waveSpeed = 0;
 
 let terrain = [];
 
+let backgroundColour;
+
+let terrainSpike;
+
 //creating an array to store the stars
 let stars = [];
 //creating a letiable to store the star's speed
@@ -96,25 +100,34 @@ function playOrPauseSong() {
     guitar.loop();
     drums.loop();
     vox.loop();
+    voxAmp = new p5.Amplitude;
+    voxAmp.setInput(vox);
+    drumsAmp = new p5.Amplitude;
+    drumsAmp.setInput(drums);
+    bassAmp = new p5.Amplitude;
+    bassAmp.setInput(bass);
     guitarAmp = new p5.Amplitude;
     guitarAmp.setInput(guitar);
   }
 }
 
-displayBackground(){
-
-
-background(backgroundColour);
+function displayBackground(){
+voxLevel = voxAmp.getLevel();
+backgroundColour = map(voxLevel, 0, 1, 0, 255);
+background(backgroundColour, backgroundColour/150, backgroundColour);
 }
 
 function displayTerrain() {
   push();
+  drumsLevel = drumsAmp.getLevel();
+  terrainSpike = map(drumsLevel, 0, 1, 0, 8);
+
   waveSpeed -= 0.06;
 let yoff = waveSpeed;
 for (let y = 0; y < rows; y++) {
   let xoff = 0;
   for (let x = 0; x < cols; x++) {
-    terrain[x][y] = map(noise(xoff, yoff), 0, 1, -100, 100);
+    terrain[x][y] = map(noise(xoff, yoff), 0, 1, -100 * terrainSpike, 100 * terrainSpike);
     xoff += 0.2;
   }
   yoff += 0.2;
@@ -154,6 +167,7 @@ function displayStars() {
 
 function branch(len) {
   push();
+translate(0,0,-5);
   //creates branches
   if (len > 10) {
     strokeWeight(map(len, 10, 100, 1, 15));

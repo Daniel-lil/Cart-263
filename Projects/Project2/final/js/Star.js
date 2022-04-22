@@ -7,7 +7,7 @@ function Star() {
 
   //function to reset star's position if they go out of view
   this.updateStar = function() {
-    this.z = this.z - speed;
+    this.z = this.z - starSpeed;
     if (this.z < 1) {
       this.z = width;
       this.x = random(-width, width);
