@@ -2,10 +2,11 @@
 Cart 263 Project 2
 Daniel Little
 
-a program which will draw a scene and
-animate that scene to go along with a song
+This is my main file for my second project for Cart-263
+This project is a calming audio reactive visualizer based on natural scenery
 
-The song is started by clicking on the canvas
+!!The song is started by clicking on the canvas!!
+  !!the tree can be controlled by pressing the arrow keys!!
 */
 
 "use strict";
@@ -24,7 +25,8 @@ let terrain = [];
 
 //creating a variable to use to change the background colour
 let backgroundColour;
-
+////creating a variable to use to change the tree Size
+let treeSize = 15;
 //creating an array to store the stars
 let stars = [];
 //creating a letiable to store the star's speed
@@ -63,7 +65,7 @@ function setup() {
   //using scale, width and height dimensions to calculate the length of # of rows +columns
   cols = w / scl;
   rows = h / scl;
-//using for loops to fill the array for terrain coordinates
+  //using for loops to fill the array for terrain coordinates
   for (let x = 0; x < cols; x++) {
     terrain[x] = [];
     for (let y = 0; y < rows; y++) {
@@ -83,8 +85,8 @@ function setup() {
 function draw() {
   displayBackground();
   displayStars();
+  branch(treeSize);
   displayTerrain();
-  branch(100);
 }
 
 //pauses + plays each part of the song
@@ -99,14 +101,12 @@ function playOrPauseSong() {
     guitar.loop();
     drums.loop();
     vox.loop();
-//  sets corresponding amplitude input to the each part song
-    voxAmp = new p5.Amplitude;
+    //  sets corresponding amplitude input to the each part song
+    voxAmp = new p5.Amplitude(.6);
     voxAmp.setInput(vox);
-    drumsAmp = new p5.Amplitude;
+    drumsAmp = new p5.Amplitude(.7);
     drumsAmp.setInput(drums);
-    bassAmp = new p5.Amplitude;
-    bassAmp.setInput(bass);
-    guitarAmp = new p5.Amplitude;
+    guitarAmp = new p5.Amplitude(.1);
     guitarAmp.setInput(guitar);
   }
 }
@@ -114,8 +114,8 @@ function playOrPauseSong() {
 //changes background colour based on vocal amplitude
 function displayBackground() {
   voxLevel = voxAmp.getLevel();
-  backgroundColour = map(voxLevel, 0, 1, 0, 255);
-  background(backgroundColour, backgroundColour / 150, backgroundColour);
+  backgroundColour = map(voxLevel, 0, 1, 5, 1000);
+  background(backgroundColour/120, backgroundColour / 4, backgroundColour);
 }
 
 //displays and updates wavelike terrain
@@ -124,13 +124,13 @@ function displayTerrain() {
   //creates spikes in terrain based on drum amplitude multipled by perlin noise
   //so that there's always a little bit of smooth waves
   drumsLevel = drumsAmp.getLevel();
-  terrainSpike = map(drumsLevel, 0, 1, 0, 8);
+  terrainSpike = map(drumsLevel, 0, 1, 1, 100);
   waveSpeed -= 0.06;
   let yoff = waveSpeed;
   for (let y = 0; y < rows; y++) {
     let xoff = 0;
     for (let x = 0; x < cols; x++) {
-      terrain[x][y] = map(noise(xoff, yoff), 0, 1, -10 * terrainSpike, 10 * terrainSpike);
+      terrain[x][y] = map(noise(xoff, yoff), 0, 1, -25 * terrainSpike, 25 * terrainSpike);
       xoff += 0.2;
     }
     yoff += 0.2;
@@ -144,7 +144,7 @@ function displayTerrain() {
   stroke(23, 62, 75);
   translate(-w / 2, -h / 2);
   for (let y = 0; y < rows - 1; y++) {
-//actually draws the terrain by using a triangle strip
+    //actually draws the terrain by using a triangle strip
     beginShape(TRIANGLE_STRIP);
     for (let x = 0; x < cols; x++) {
       vertex(x * scl, y * scl, terrain[x][y]);
@@ -160,8 +160,12 @@ function displayStars() {
   //stores amplitude data from different frequencies of song in variables
   guitarLevel = guitarAmp.getLevel();
   //maps amplitude of low frequencies to different scale and stores it in speed variable
-  starSpeed = map(guitarLevel, 0, 1, .2, 40);
+  starSpeed = map(guitarLevel, 0, 1, 0.2, 25);
   //translate(width / 2, height / 2);
+
+  if (!bass.isPlaying()){
+    starSpeed = 0.2;
+  }
   for (let i = 0; i < stars.length; i++) {
     stars[i].updateStar();
     stars[i].showStar();
@@ -169,10 +173,35 @@ function displayStars() {
   pop();
 }
 
+//allows user to control tree size with the number keys
+  function keyPressed(){
+    if(keyCode === 49){
+    treeSize = 15;
+  } else if(keyCode === 50){
+    treeSize = 25;
+    } else if (keyCode === 51){
+    treeSize = 35;
+    } else if (keyCode === 52){
+    treeSize = 45;
+  }else if (keyCode === 53){
+    treeSize = 55;
+  } else if (keyCode === 54){
+    treeSize = 65;
+  }else if (keyCode === 55){
+    treeSize = 75;
+  }else if (keyCode === 56){
+    treeSize = 85;
+  }else if (keyCode === 57){
+    treeSize = 95;
+  }else if (keyCode === 48){
+    treeSize = 105;
+    }
+  }
+
 //function to create the tree
 function branch(len) {
   push();
-  translate(0, 0, -5);
+
   //creates branches
   if (len > 10) {
     strokeWeight(map(len, 10, 100, 1, 15));
