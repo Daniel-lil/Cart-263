@@ -26,6 +26,11 @@ let stars = [];
 let speed;
 //creating for the song (currently just a placeholder)
 let song;
+let bass;
+let guitar;
+let drums;
+let vox;
+
 //creating variables to use for the song's fft analysis
 let fft;
 let levels;
@@ -37,6 +42,10 @@ Loads music from assets and stores it in song variable
 */
 function preload() {
   song = loadSound(`assets/sounds/song.mp3`);
+  bass = loadSound(`assets/sounds/Bass.mp3`);
+  guitar = loadSound(`assets/sounds/Guitar.mp3`);
+  drums = loadSound(`assets/sounds/Drums.mp3`);
+  vox = loadSound(`assets/sounds/Vox.mp3`);
 }
 
 function setup() {
@@ -82,10 +91,16 @@ function draw() {
 
 //pauses + plays song + sets fft input to the song
 function playOrPauseSong() {
-  if (song.isPlaying()) {
-    song.pause();
+  if (bass.isPlaying() && guitar.isPlaying() && drums.isPlaying() && vox.isPlaying()) {
+    bass.pause();
+    guitar.pause();
+    drums.pause();
+    vox.pause();
   } else {
-    song.loop();
+    bass.loop();
+    guitar.loop();
+    drums.loop();
+    vox.loop();
     fft = new p5.FFT(.9);
     fft.setInput(song);
   }
